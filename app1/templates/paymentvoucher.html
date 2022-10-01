@@ -80,12 +80,16 @@
         
         document.getElementById('ledgeraccount').value=names;
         document.getElementById('currentbalance').hidden=false
+        document.getElementById('cr').hidden=false
        
         
     }
-    function setparticulars(names){
+    function setparticulars(names,id){
         
         document.getElementById('particular').value=names;
+        document.getElementById('curbal').hidden=false
+        document.getElementById('curbal').value=id
+
 
        
         
@@ -93,11 +97,34 @@
  
 function setok()
         {
-            b=document.getElementById('currentbalance').value
-            balance=document.getElementById('amount').value;
+            b=Number(document.getElementById('currentbalance').value)
+            balance=Number(document.getElementById('amount').value);
             bal=b-balance;
-            document.getElementById('curbal').value=balance
+           
+            if (bal<0)
+            {
+                bl=b+balance
+                
+                document.getElementById('currentbalance').value=bl
+                document.getElementById('currentbalance').style.color = "#ff0000";
+                document.getElementById('curbal').value=balance
+                document.getElementById('cr').value="Cr"
+                document.getElementById('cr').style.color = "#ff0000";
+                
+            }
+            else if(bal>0){
+                document.getElementById('curbal').value=balance
+                document.getElementById('currentbalance').value=bal
+
+            }
+            else{
+                 document.getElementById('curbal').value=balance
+                document.getElementById('currentbalance').value=bal
+           
+            }
+           /* document.getElementById('curbal').value=balance
             document.getElementById('currentbalance').value=bal
+           */ 
             document.getElementById('total').value=balance
         }
 </script> 
@@ -124,7 +151,7 @@ function setok()
                             <div class="col-sm-8 m-0 p-0"> 
                                 
                                 
-                            <input type="text" class="form-control" id="" value="1" name="payment" onload="setvalue(value)">
+                            <input type="text" class="form-control" id="" value="{{no}}" name="payment" onload="setvalue(value)">
                         
                     </div>
                         </div>
@@ -140,15 +167,19 @@ function setok()
 
                         <div class="row container-fluid  p-2 m-0">
                             <div class="col-sm-4 m-0 p-0"> <label >Current Balance :</label></div>
-                            <div class="col-sm-8 m-0 p-0"> 
+                            <div class="col-sm-4 m-0 p-0"> 
                                 {% for i in ledger %}   
-                            <input type="text" name="currentbalance" id="currentbalance" class="form-control" value="{{i.opening_blnc}}" readonly hidden>
+                            <input type="text" name="currentbalance" id="currentbalance"  style="width:100px" class="form-control" value="{{i.opening_blnc}}"  readonly hidden>
+                            </div>
                         {% endfor %}
-                        </div>
+                        <div class="col-sm-4 m-0 p-0"> 
+
+                        <input type="text" name="cr" id="cr"  style="width:50px"class="form-control" value="Dr"  readonly hidden>
+                            </div>
                         </div>
                     </div>
                 </div>
-              
+            
 
            <div class="row container-fluid  p-0 m-0" style=" border: 1px solid rgba(128, 128, 128, 0.6);"> 
       
@@ -165,6 +196,7 @@ function setok()
                             </tr>
                         </thead>
                         <div class="table" >
+        
                         <tbody hidden name="tbody" id="tbody">
                             <tr>
                                 <td>
@@ -205,14 +237,18 @@ function setok()
                 
             <div class="row container-fluid  p-2 m-0">
                             <div class="col-sm-4 m-0 p-0"> <label >Cur Bal :</label></div>
-                            <div class="col-sm-8 m-0 p-0"> 
+                            <div class="col-sm-4 m-0 p-0"> 
                                
-                            <input type="text" id="curbal" name="curbal"  readonly>
+                            <input type="text" id="curbal" style="width:100px" name="curbal"  readonly>
                         
                         </div>
+                        <div class="col-sm-4 m-0 p-0"> 
+
+                            <input type="text" name="dr" id="dr"  style="width:50px;margin-left: -150px;" value="Dr"  hidden readonly >
+                                </div>
                         </div>
             </div>
-                        
+                
                 <div class="row container-fluid m-0 w-100 p-0">
                     <table class="table p-0 m-0">
                         <tbody>
@@ -298,7 +334,7 @@ function setok()
                                 {% for i in ledger %}
                             
                                 <tr>
-                                <div style="margin-left: 25px;"><a onclick="setparticulars('{{ i.name }}');">{{i.name}}</a></div>
+                                <div style="margin-left: 25px;"><a onclick="setparticulars('{{ i.name }}','{{i.opening_blnc}}');">{{i.name}}</a></div>
                                 </tr>
                                 
                                 {% endfor %}

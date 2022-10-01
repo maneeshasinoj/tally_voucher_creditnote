@@ -10313,15 +10313,23 @@ def payment_voucher(request):
             return redirect('/')
         cmp=Companies.objects.get(id=t_id)
         ledger=tally_ledger.objects.all()
-        payment=paymentvoucher.objects.all()
-        return render(request,'paymentvoucher.html',{'ledger':ledger,'cmp':cmp,'payment':payment})
+        payment=paymentvoucher.objects.last()
+        no=payment.id
+        no=no+1
+        print(no)
+        return render(request,'paymentvoucher.html',{'ledger':ledger,'cmp':cmp,'no':no})
 
 def receipt_voucher(request):
     ledger=tally_ledger.objects.all()
-    receipt=paymentvoucher.objects.all()
-    return render(request,'receiptvoucher.html',{'ledger':ledger})
+    receipt=receiptvoucher.objects.last()
+    no=receipt.id
+    no=no+1
+    print(no)
+    return render(request,'receiptvoucher.html',{'ledger':ledger,'no':no})
 
 def add_paymentvoucher(request):
+    
+   
     if request.method=='POST' :
         
         item = request.POST['particular']
@@ -10348,8 +10356,32 @@ def add_receiptvoucher(request):
         payment=receiptvoucher(date=date,particulars=item,voucherno=vouchno,vouchertype="Receipt",debitamount=amount)
         payment.save()
         print('hiii')
-        return redirect('receipt_voucher')
-    return render(request,'index.html')
+        messages.info(request,'Receipt entered successfully')
+        #return redirect('receipt_voucher')
+        return render(request,'receiptvoucher.html')
+
+def purchase(request):#ann
+    return render(request,'sale.html')  
+
+
+def purchase_add(request):#ann
+ if request.method=="POST":
+    supplierinvoiceno=request.POST.get('Suppliernumber') 
+    partyAc=request.POST.get('Party_name') 
+    purchase_date=request.POST.get('Date')
+    currentbalancep =request.POST.get('current_ac_balancep')
+    currentbalancepl =request.POST.get('current_ac_balancel')
+    quantity1=request.POST.get('quantity')
+    price1=request.POST.get('rate')
+    total1=request.POST.get('amount')
+    nameofitem=request.POST.get('Item_name')
+    purchasele=request.POST.get('purchaseledger')
+    purchase=Purchase(supplierinvoiceno=supplierinvoiceno,partyAccntname=partyAc,purchase_date=purchase_date,purchaseledger=purchasele,currentbalancepl =currentbalancepl ,currentbalancep=currentbalancep,nameofitem=nameofitem,quantity=quantity1,price=price1,total=total1)
+    purchase.save()
+    print("purchase")
+    messages.info(request,'Purchase entered successfully')
+    return render(request,'sale.html',)    
+    #return redirect('/')       
 
 
 

@@ -69,16 +69,20 @@
   
       
     
-  function setledger(names){
+  function setledger(names,id){
         
         document.getElementById('ledgeraccount').value=names;
         document.getElementById('currentbalance').hidden=false
+        document.getElementById('currentbalance').value=id
+        document.getElementById('cr').hidden=false
        
         
     }
-    function setparticulars(names){
+    function setparticulars(names,id){
         
         document.getElementById('particular').value=names;
+        document.getElementById('curbal').hidden=false
+        document.getElementById('curbal').value=id
 
        
         
@@ -86,12 +90,51 @@
   
 function setok()
         {
-            b=Number(document.getElementById('currentbalance').value)
+            currntbal=Number(document.getElementById('currentbalance').value)
+            amount=Number(document.getElementById('amount').value);
+            curbalnce=Number(document.getElementById('curbal').value)
+            balance=curbalnce-amount     
+            bal=currntbal+amount;
+            document.getElementById('total').value=amount
+            if (balance<0)
+            {
+                bl=curbalnce+amount
+                
+                document.getElementById('curbal').value=bl
+                document.getElementById('curbal').style.color = "#ff0000";
+                document.getElementById('currentbalance').value=bal
+                document.getElementById('dr').value="Cr"
+                document.getElementById('dr').style.color = "#ff0000";
+                document.getElementById('total').value=amount
+                
+            }
+            else if(balance>0){
+                document.getElementById('currentbalance').value=bal
+                document.getElementById('curbal').value=balance
+                document.getElementById('total').value=amount
+
+            }
+            else{
+                 document.getElementById('currentbalance').value=bal
+                document.getElementById('curbal').value=balance
+                document.getElementById('total').value=amount
+           
+            }
+           /* document.getElementById('curbal').value=balance
+            document.getElementById('currentbalance').value=bal
+           */ 
+            
+        
+            
+          /*  b=Number(document.getElementById('currentbalance').value)
             balance=Number(document.getElementById('amount').value);
+            bl=Number(document.getElementById('curbal').value);
             bal=b+balance
-            document.getElementById('curbal').value=balance
+            d=bl-balance
+            document.getElementById('curbal').value=d
             document.getElementById('currentbalance').value=bal
             document.getElementById('total').value=balance
+            */
         }
 </script> 
   <div class="m-0" style="width: 800px;margin-left: 100px;">
@@ -115,7 +158,7 @@ function setok()
                         
                             <div class="col-sm-4 m-0 p-0"> <label >Receipt</label></div>
                             <div class="col-sm-8 m-0 p-0"> 
-                            <input type="text" class="form-control" id="" value="1" name="receipt" onload="setvalue(value)"></div>
+                            <input type="text" class="form-control" id="" value="{{no}}" name="receipt" onload="setvalue(value)"></div>
                         </div>
     
                        
@@ -129,11 +172,17 @@ function setok()
 
                         <div class="row container-fluid  p-2 m-0">
                             <div class="col-sm-4 m-0 p-0"> <label >Current Balance :</label></div>
-                            <div class="col-sm-8 m-0 p-0"> 
-                                {% for i in ledger %}   
-                            <input type="text" name="currentbalance" id="currentbalance" class="form-control" value="{{i.opening_blnc}}" readonly hidden>
-                        {% endfor %}
-                        </div>
+                            <div class="col-sm-4 m-0 p-0"> 
+                           <!--     {% for i in ledger %}   -->
+                            
+                            <input type="text" name="currentbalance" id="currentbalance" style="width:100px" class="form-control"  readonly hidden>
+                            </div>
+                       <!-- {% endfor %} -->
+                       <div class="col-sm-4 m-0 p-0"> 
+
+                        <input type="text" name="cr" id="cr"  style="width:50px"class="form-control" value="Dr"  readonly hidden>
+                            </div>
+                        
                         </div>
                     </div>
                 </div>
@@ -196,7 +245,7 @@ function setok()
                             <div class="col-sm-4 m-0 p-0"> <label >Cur Bal :</label></div>
                             <div class="col-sm-8 m-0 p-0"> 
                                
-                            <input type="text" id="curbal" name="curbal"  readonly>
+                            <input type="text" id="curbal" name="curbal" class="form-control" readonly hidden>
                         
                         </div>
                         </div>
@@ -249,7 +298,7 @@ function setok()
                                     {% for i in ledger %}
                                         {% if i.under == "Bank Account" %}
                                     <tr>
-                                    <div style="margin-left: 25px;"><a onclick="setledger('{{ i.name }}');">{{i.name}}</a></div>
+                                    <div style="margin-left: 25px;"><a onclick="setledger('{{ i.name }}','{{i.opening_blnc}}');">{{i.name}}</a></div>
                                     </tr>
                                     {% endif %}
                                     {% endfor %}
@@ -287,7 +336,7 @@ function setok()
                                 {% for i in ledger %}
                             
                                 <tr>
-                                <div style="margin-left: 25px;"><a onclick="setparticulars('{{ i.name }}');">{{i.name}}</a></div>
+                                <div style="margin-left: 25px;"><a onclick="setparticulars('{{ i.name }}','{{i.opening_blnc}}');">{{i.name}}</a></div>
                                 </tr>
                                 
                                 {% endfor %}
