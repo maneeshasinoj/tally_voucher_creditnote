@@ -10340,6 +10340,16 @@ def add_paymentvoucher(request):
         
         payment=paymentvoucher(date=date,particulars=item,voucherno=vouchno,vouchertype="Payment",debitamount=amount)
         payment.save()
+        currentbalance=request.POST['currentbalance']
+        account=request.POST['ledgeraccount']
+        particular=request.POST['particular']
+        curbal=request.POST['curbal']
+        tally_ledger.objects.filter(name=account).update(opening_blnc=currentbalance)
+        tally_ledger.objects.filter(name=particular).update(opening_blnc=curbal)
+        #ledger.opening_blnc=currentbalance
+        
+       # print(ledger.opening_blnc)
+       # ledger.save()
         print('hiii')
         return redirect('payment_voucher')
     return render(request,'index.html')
@@ -10353,12 +10363,18 @@ def add_receiptvoucher(request):
         amount=request.POST['total']
         date=datetime.today() 
         
-        payment=receiptvoucher(date=date,particulars=item,voucherno=vouchno,vouchertype="Receipt",debitamount=amount)
-        payment.save()
+        receipt=receiptvoucher(date=date,particulars=item,voucherno=vouchno,vouchertype="Receipt",debitamount=amount)
+        receipt.save()
+        currentbalance=request.POST['currentbalance']
+        account=request.POST['ledgeraccount']
+        particular=request.POST['particular']
+        curbal=request.POST['curbal']
+        tally_ledger.objects.filter(name=account).update(opening_blnc=currentbalance)
+        tally_ledger.objects.filter(name=particular).update(opening_blnc=curbal)
         print('hiii')
-        messages.info(request,'Receipt entered successfully')
-        #return redirect('receipt_voucher')
-        return render(request,'receiptvoucher.html')
+        
+        return redirect('receipt_voucher')
+    return render(request,'index.html')
 
 def purchase(request):#ann
     return render(request,'sale.html')  
