@@ -657,6 +657,7 @@ urlpatterns = [
     path('add_paymentvoucher',views.add_paymentvoucher,name='add_paymentvoucher'),
     path('receipt_voucher',views.receipt_voucher,name='receipt_voucher'),
     path('add_receiptvoucher',views.add_receiptvoucher,name='add_receiptvoucher'),
+    path('paymentvouchersample',views.paymentvouchersample,name='paymentvouchersample'), 
     path('purchase',views.purchase,name='purchase'),#purchaseann
     path('purchase_add',views.purchase_add,name='purchase_add'),#ann
 

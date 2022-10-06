@@ -360,6 +360,15 @@ function setok()
                         </tbody>
                     </table>
                 </div>   
+                <div class="row m-0 mt-4">
+                    <div class="col-md-4">NARRATION: 
+                    </div>
+                    <div class="col-md-8"><textarea class="form-control" id="narration" name="narration" rows="5" cols="30" width="100%"></textarea></div><br><br><br><br>
+                    </div>
+                    <!--<div class="col-md-2">
+                     
+                    </div>-->
+                  </div>   
                 <div class="enter w-100 py-4"><button class="btn btn-info w-25 px-4">SAVE</button></div> 
            </div>
             
@@ -377,7 +386,7 @@ function setok()
                 
                 <!-- Listing -->
               
-                <div id="party" hidden class="row container " style="margin-block-start: -490px;margin-left: 330px;justify-content: end;">
+                <div id="party" hidden class="row container " style="margin-block-start: -490px;margin-left: 230px;justify-content: end;">
                     <div class="col-sm-6 m-1 p-1"></div>
                     <div class="col-sm-4 m-1 p-1" style=" background-color:rgba(0,0,0,0.2); height: 400px; padding-bottom: 10px;">
                         <!-- <a href="javascript:history.go(-1);" class="close">+</a> -->
@@ -399,7 +408,7 @@ function setok()
                                     </tr>
                                     <hr style="width:100%;text-align:left;margin-left:0">
                                     {% for i in ledger %}
-                                        {% if i.under == "Bank Account" %}
+                                        {% if i.under == "Bank_Accounts" %}
                                     <tr>
                                     <div style="margin-left: 25px;"><a onclick="setledger('{{ i.name }}','{{i.opening_blnc}}');">{{i.name}}</a></div>
                                     </tr>
@@ -412,10 +421,10 @@ function setok()
                         </div>
                     
            </div>    
-        -->
+        
             <!-- Listing -->
               
-            <div id="ledger" hidden class="row container " style="margin-block-start: -490px;margin-left: 330px;justify-content: end;">
+            <div id="ledger" hidden class="row container " style="margin-block-start: -490px;margin-left: 230px;justify-content: end;">
                 <div class="col-sm-8 m-1 p-1"></div>
                 <div class="col-sm-4 m-1 p-1" style=" background-color:rgba(0,0,0,0.2); height: 400px; padding-bottom: 10px;">
                     <!-- <a href="javascript:history.go(-1);" class="close">+</a> -->
@@ -451,7 +460,7 @@ function setok()
                 
        </div>    
         
-       <div id="ledger1" hidden class="row container " style="margin-block-start: -490px;margin-left: 330px;justify-content: end;">
+       <div id="ledger1" hidden class="row container " style="margin-block-start: -490px;margin-left: 230px;justify-content: end;">
         <div class="col-sm-8 m-1 p-1"></div>
         <div class="col-sm-4 m-1 p-1" style=" background-color:rgba(0,0,0,0.2); height: 400px; padding-bottom: 10px;">
             <!-- <a href="javascript:history.go(-1);" class="close">+</a> -->

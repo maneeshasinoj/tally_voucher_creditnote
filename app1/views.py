@@ -33,6 +33,7 @@ from django.db.models.functions import TruncDate
 from django.db.models.functions import Extract
 from django.db.models import Count
 from unittest import TextTestRunner
+from app1.forms import paymentvoucherform
 
 # Create your views here.
 
@@ -10376,6 +10377,15 @@ def add_receiptvoucher(request):
         return redirect('receipt_voucher')
     return render(request,'index.html')
 
+
+def paymentvouchersample(request):
+    ledger=tally_ledger.objects.all()
+    receipt=receiptvoucher.objects.last()
+    no=receipt.id
+    no=no+1
+    print(no)
+    form=paymentvoucherform()
+    return render(request,'paymentvouchersample.html',{'form':form,'ledger':ledger,'no':no})
 def purchase(request):#ann
     return render(request,'sale.html')  
 

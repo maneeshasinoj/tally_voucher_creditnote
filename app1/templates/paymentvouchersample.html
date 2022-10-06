@@ -1,7 +1,7 @@
 
     {% extends 'base.html' %}
     {% block body %}
-    
+    {% load crispy_forms_filters %}
     <style>
         .enter{
             display: flex;
@@ -21,13 +21,23 @@
       /*document.getElementById('ledger').hidden=true */
      
   }
+    function showVouchers(){
+        document.getElementById('voucherPop').style.visibility= "visible";
+        document.getElementById('voucherPop').style.display = "block";
+        /*document.getElementById('ledger').hidden=true*/
+     
+        
+    }
     window.addEventListener('click',outsideClick)
     function outsideClick(event){
         if(event.target == document.getElementById('voucherPop')){
             document.getElementById('voucherPop').style.display = "none"
         }
     }
-   
+   /* function setVtype(name){
+        document.getElementById('voucherPop').style.display = "none"
+        document.getElementById('name').innerHTML = name
+    }*/
     function setVtype(names){
         if (document.getElementById('ledgeraccount').value==null)
         {
@@ -49,7 +59,6 @@
         }
     }
     
-    
     function showunder()
         {
             document.getElementById('tbody').hidden=false
@@ -60,13 +69,11 @@
         function showparticular()
         {
             
-        
-            document.getElementById('ledger').hidden=false
             document.getElementById('party').hidden=true
-            
+            document.getElementById('ledger').hidden=false
+           
             
         }
-       
         function showparticular1()
         {
             
@@ -77,129 +84,118 @@
             
         }
   
-      
-    
   function setledger(names,id){
         
         document.getElementById('ledgeraccount').value=names;
         document.getElementById('currentbalance').hidden=false
-        document.getElementById('currentbalance').value=id
         document.getElementById('cr').hidden=false
+        document.getElementById('currentbalance').value=id
        
         
     }
     function setparticulars(names,id){
         
         document.getElementById('particular').value=names;
+        
         document.getElementById('curbal').hidden=false
         document.getElementById('curbal').value=id
+
 
        
         
     }
     function setparticulars1(names,id){
       
-      document.getElementById('particulars').value=names;
-      
-      document.getElementById('curbal1').hidden=false
-      document.getElementById('curbal1').value=id
+        document.getElementById('particulars').value=names;
+        
+        document.getElementById('curbal1').hidden=false
+        document.getElementById('curbal1').value=id
 
 
-     
-      
-  }
-  function setok1()
-  {
-      document.getElementById('ledger').hidden=true
-      document.getElementById('ledger1').hidden=false
-      currntbal=Number(document.getElementById('currentbalance').value)
-            amount=Number(document.getElementById('amount1').value);
+       
+        
+    }
+    function setok1()
+    {
+        document.getElementById('ledger').hidden=true
+        document.getElementById('ledger1').hidden=false
+        currntbalance=Number(document.getElementById('currentbalance').value)
+            amount=Number(document.getElementById('amount1').value)
             curbalnce=Number(document.getElementById('curbal1').value)
-            balance=curbalnce-amount     
-            bal=currntbal+amount;
+            bal=currntbalance-amount;  
+            balance=curbalnce+amount
             document.getElementById('total').value=amount
-            if (balance<0)
+            if (bal<0)
             {
-                bl=curbalnce+amount
+                bl=currntbalance+amount
                 
-                document.getElementById('curbal1').value=bl
-                document.getElementById('curbal1').style.color = "#ff0000";
-                document.getElementById('currentbalance').value=bal
-                document.getElementById('dr1').value="Cr"
-                document.getElementById('dr1').style.color = "#ff0000";
+                document.getElementById('currentbalance').value=bl
+                document.getElementById('currentbalance').style.color = "#ff0000";
+                document.getElementById('curbal1').value=balance
+                document.getElementById('cr').value="Cr"
+                document.getElementById('cr').style.color = "#ff0000";
                 document.getElementById('total').value=amount
                 
             }
-            else if(balance>0){
-                document.getElementById('currentbalance').value=bal
+            else if(bal>0){
                 document.getElementById('curbal1').value=balance
+                document.getElementById('currentbalance').value=bal
                 document.getElementById('total').value=amount
 
             }
             else{
-                 document.getElementById('currentbalance').value=bal
-                document.getElementById('curbal1').value=balance
+                 document.getElementById('curbal1').value=balance
+                document.getElementById('currentbalance').value=bal
                 document.getElementById('total').value=amount
            
             }
-      amount=Number(document.getElementById('amount').value)
-      amount1=Number(document.getElementById('amount1').value)
-      currntbal=Number(document.getElementById('currentbalance').value)
-      currntbal=currntbal-amount1
-      total=amount+amount1
-      document.getElementById('total').value=total
-      document.getElementById('currentbalance').value=currtbal
-  }
+        amount=Number(document.getElementById('amount').value)
+        amount1=Number(document.getElementById('amount1').value)
+        total=amount+amount1
+        document.getElementById('total').value=total
+    }
+ 
 function setok()
         {
-            currntbal=Number(document.getElementById('currentbalance').value)
-            amount=Number(document.getElementById('amount').value);
+            
+            
+            currntbalance=Number(document.getElementById('currentbalance').value)
+            amount=Number(document.getElementById('amount').value)
             curbalnce=Number(document.getElementById('curbal').value)
-            balance=curbalnce-amount     
-            bal=currntbal+amount;
+            bal=currntbalance-amount;  
+            balance=curbalnce+amount
             document.getElementById('total').value=amount
-            if (balance<0)
+            if (bal<0)
             {
-                bl=curbalnce+amount
+                bl=currntbalance+amount
                 
-                document.getElementById('curbal').value=bl
-                document.getElementById('curbal').style.color = "#ff0000";
-                document.getElementById('currentbalance').value=bal
-                document.getElementById('dr').value="Cr"
-                document.getElementById('dr').style.color = "#ff0000";
+                document.getElementById('currentbalance').value=bl
+                document.getElementById('currentbalance').style.color = "#ff0000";
+                document.getElementById('curbal').value=balance
+                document.getElementById('cr').value="Cr"
+                document.getElementById('cr').style.color = "#ff0000";
                 document.getElementById('total').value=amount
                 
             }
-            else if(balance>0){
-                document.getElementById('currentbalance').value=bal
+            else if(bal>0){
                 document.getElementById('curbal').value=balance
+                document.getElementById('currentbalance').value=bal
                 document.getElementById('total').value=amount
 
             }
             else{
-                 document.getElementById('currentbalance').value=bal
-                document.getElementById('curbal').value=balance
+                 document.getElementById('curbal').value=balance
+                document.getElementById('currentbalance').value=bal
                 document.getElementById('total').value=amount
            
             }
-            document.getElementById('ledger').hidden=true
-           document.getElementById('tbodys').hidden=false
-
            /* document.getElementById('curbal').value=balance
             document.getElementById('currentbalance').value=bal
            */ 
-            
-        
-            
-          /*  b=Number(document.getElementById('currentbalance').value)
-            balance=Number(document.getElementById('amount').value);
-            bl=Number(document.getElementById('curbal').value);
-            bal=b+balance
-            d=bl-balance
-            document.getElementById('curbal').value=d
-            document.getElementById('currentbalance').value=bal
-            document.getElementById('total').value=balance
-            */
+           document.getElementById('ledger').hidden=true
+           document.getElementById('tbodys').hidden=false
+
+           
         }
 </script> 
   <div class="m-0" style="width: 800px;margin-left: 100px;">
@@ -207,10 +203,10 @@ function setok()
        
     <h6 class="bg-info text-light p-1 m-1 text-left">Accounting Voucher Creation</h6>
     
-    <div  style="text-align: center;margin-top:-30px;font-weight:900">{{com.name}}</div>
+    <div  style="text-align: center;margin-top:-30px;font-weight:900">{{cmp.name}}</div>
     <div style="text-align: right;margin-top:-25px;margin-right:180px;font-weight:900" id="currentDate"></div>
 
-            <form  style="background-color:rgba(0,0,0,.4);" method="post" action="{% url 'add_receiptvoucher' %}">
+            <form  style="background-color:rgba(0,0,0,.4);" method="post" action="{% url 'add_paymentvoucher' %}">
                 {% csrf_token %}
                 
                
@@ -221,9 +217,13 @@ function setok()
                        
                         <div class="row container-fluid  p-2 m-0">
                         
-                            <div class="col-sm-4 m-0 p-0"> <label >Receipt</label></div>
+                            <div class="col-sm-4 m-0 p-0"> <label >Payment</label></div>
                             <div class="col-sm-8 m-0 p-0"> 
-                            <input type="text" class="form-control" id="" value="{{no}}" name="receipt"></div>
+                                
+                                
+                            <input type="text" class="form-control" id="" value="{{no}}" name="payment" >
+                        
+                    </div>
                         </div>
     
                        
@@ -234,6 +234,7 @@ function setok()
                             <div class="col-sm-8 m-0 p-0"> 
                             <input type="text" class="form-control" id="ledgeraccount" placeholder="" name="ledgeraccount" onclick="showunder()"></div>
                         </div>
+
                         <div class="row container-fluid  p-2 m-0">
                             <div class="col-sm-4 m-0 p-0"> <label >Current Balance :</label></div>
                             <div class="col-sm-4 m-0 p-0"> 
@@ -261,35 +262,34 @@ function setok()
                                 <th>Amount</th>
                             </tr>
                         </thead>
+                        {% for i in ledger %}
                         <div class="table" >
-        
-                        <tbody hidden name="tbody" id="tbody">
+       
+                        <tbody  name="tbody" id="tbody">
                             <tr>
-                               
+                                {% for field in form %}
                                 <td>
-                                
-                                <input type="text" id="particular" name="particular" class="form-control" placeholder="" onclick="showparticular()" style="width: 200px;">
-                                
+                                    {{ form.particulars }} 
+                                <!--<input type="text" id="particular" name="particular" class="form-control" placeholder="" onclick="showparticular()" style="width: 200px;">
+                                -->
                                 <div class="col-sm-12 m-1 p-0"> <label >Cur Bal :</label>
-                                 <input type="text" id="curbal" style="width:100px" name="curbal"  readonly>
-
-                                 <input type="text" name="dr" id="dr" style="width:50px" value="Dr"   readonly >
-                                </div>
+                                    <input type="text" id="curbal" style="width:100px" name="curbal"  readonly>
+   
+                                    <input type="text" name="dr" id="dr" style="width:50px" value="Dr"   readonly >
+                                   </div>
                                 </td>
                               
                         <td>
-                            
+
                         </td>
                         <td>
-                    
+
                         </td>
                                 <td>
-                                    <div class="row container-fluid  p-0">
-                                    
-                                <input type="text" name="amount" id="amount" class="form-control" placeholder="0"  style="width: 100px;margin-top: 0px;">
-                                    </div>   
-                                    
-                            </td>
+                                    {{form.creditamount}}
+                               <!-- <input type="text" name="amount" id="amount" class="form-control" placeholder="0"  style="width: 100px;">
+                               -->
+                                </td>
                                 
                                 <td>
                                     <input type="button" id="ok" value="OK" onclick="setok()">
@@ -298,21 +298,20 @@ function setok()
                                 
                             </tr>
                             <tr>
-                                
                                 <!--
                                 <td class="w-75 m-0 p-0 pl-3" style="cursor: pointer;"><a>August</a></td>
                                 <td class="w-25 m-0 p-0 text-center">dfs</td> -->
-                            </tr>
-                            <tr>
+                          <!-- </tr>
+                            <tr>-->
                                 <!--
                                 <td class="w-75 m-0 p-0 pl-3" style="cursor: pointer;"><a>September</a></td>
                                 <td class="w-25 m-0 p-0 text-center">dfs</td> -->
-                            </tr>
+                          <!--  </tr>
                           
         
                         </tbody>
-                        
-                        <tbody hidden name="tbodys" id="tbodys">
+                        {% endfor %}
+                <!--        <tbody hidden name="tbodys" id="tbodys">
                             <tr>
                                 <td>
                                 <input type="text" id="particulars" name="particulars" class="form-control" placeholder="" onclick="showparticular1()" style="width: 200px;">
@@ -340,24 +339,23 @@ function setok()
                                 
                             </tr>
                             <tr>
-                                
                                 <!--
                                 <td class="w-75 m-0 p-0 pl-3" style="cursor: pointer;"><a>August</a></td>
-                                <td class="w-25 m-0 p-0 text-center">dfs</td> -->
+                                <td class="w-25 m-0 p-0 text-center">dfs</td> 
                             </tr>
                             <tr>
-                                <!--
+                                
                                 <td class="w-75 m-0 p-0 pl-3" style="cursor: pointer;"><a>September</a></td>
-                                <td class="w-25 m-0 p-0 text-center">dfs</td> -->
+                                <td class="w-25 m-0 p-0 text-center">dfs</td> 
                             </tr>
                           
         
-                        </tbody>
-                        
+                        </tbody>-->
+                        {% endfor %}
                         </div>
                 </table>
-                
-           
+            
+            
                 
                 <div class="row container-fluid m-0 w-100 p-0">
                     <table class="table p-0 m-0">
@@ -377,12 +375,12 @@ function setok()
                     <!--<div class="col-md-2">
                      
                     </div>-->
-                  </div>     
+                  </div>   
                 <div class="enter w-100 py-4"><button class="btn btn-info w-25 px-4">SAVE</button></div> 
            </div>
             
                 </div>
-                
+                   
             </form>
       </div>
   
@@ -417,7 +415,7 @@ function setok()
                                     </tr>
                                     <hr style="width:100%;text-align:left;margin-left:0">
                                     {% for i in ledger %}
-                                        {% if i.under == "Bank Account" %}
+                                        {% if i.under == "Bank_Accounts" %}
                                     <tr>
                                     <div style="margin-left: 25px;"><a onclick="setledger('{{ i.name }}','{{i.opening_blnc}}');">{{i.name}}</a></div>
                                     </tr>
@@ -469,7 +467,7 @@ function setok()
                 
        </div>    
         
-       <div id="ledger1" hidden class="row container " style="margin-block-start: -690px;margin-left: 230px;justify-content: end;">
+       <div id="ledger1" hidden class="row container " style="margin-block-start: -490px;margin-left: 230px;justify-content: end;">
         <div class="col-sm-8 m-1 p-1"></div>
         <div class="col-sm-4 m-1 p-1" style=" background-color:rgba(0,0,0,0.2); height: 400px; padding-bottom: 10px;">
             <!-- <a href="javascript:history.go(-1);" class="close">+</a> -->
@@ -504,13 +502,11 @@ function setok()
             </div>
         
 </div>     
-        
-       
  <script>
     document.getElementById("currentDate").innerHTML=new Date().toDateString();
     function setpaymentnumber()
     {
-        a=1
+        
         v=document.getElementById('payment').value
         no=v+a
         document.getElementById('payment').value=no
