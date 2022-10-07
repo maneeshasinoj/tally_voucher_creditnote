@@ -10384,8 +10384,21 @@ def paymentvouchersample(request):
     no=receipt.id
     no=no+1
     print(no)
+    
     form=paymentvoucherform()
-    return render(request,'paymentvouchersample.html',{'form':form,'ledger':ledger,'no':no})
+    return render(request,'paymentvouchersample.html',{'form':form,'ledger':ledger,'no':no,'range':range(10)})
+
+def samplereceipt(request):
+    ledger=tally_ledger.objects.all()
+    receipt=receiptvoucher.objects.last()
+    no=receipt.id
+    no=no+1
+    print(no)
+    return render(request,'samplereceipt.html',{'ledger':ledger,'no':no})
+
+
+
+
 def purchase(request):#ann
     return render(request,'sale.html')  
 

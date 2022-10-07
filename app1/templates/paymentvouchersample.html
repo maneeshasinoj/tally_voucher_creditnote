@@ -265,34 +265,39 @@ function setok()
                         {% for i in ledger %}
                         <div class="table" >
        
-                        <tbody  name="tbody" id="tbody">
+                        <tbody  hidden name="tbody" id="tbody">
                             <tr>
-                                {% for field in form %}
+                                {% for i in range %}
                                 <td>
-                                    {{ form.particulars }} 
-                                <!--<input type="text" id="particular" name="particular" class="form-control" placeholder="" onclick="showparticular()" style="width: 200px;">
-                                -->
+                            
+                                   
+                                    <input    id="particular" name={{i.particular}} class="form-control" onclick="showparticular()">
+                                    <input name={{i.creditamount}} class="form-control" >
+                                    <input type="button" id="ok" value="OK" onclick="setok()">
+                               
+                                    <!--<input type="text" id="particular" name="particular" class="form-control" placeholder="" onclick="showparticular()" style="width: 200px;">
+                                
                                 <div class="col-sm-12 m-1 p-0"> <label >Cur Bal :</label>
                                     <input type="text" id="curbal" style="width:100px" name="curbal"  readonly>
    
                                     <input type="text" name="dr" id="dr" style="width:50px" value="Dr"   readonly >
-                                   </div>
+                                   </div>-->
                                 </td>
                               
                         <td>
 
                         </td>
                         <td>
-
+                                
                         </td>
                                 <td>
-                                    {{form.creditamount}}
+                                   
                                <!-- <input type="text" name="amount" id="amount" class="form-control" placeholder="0"  style="width: 100px;">
                                -->
                                 </td>
-                                
+                            
                                 <td>
-                                    <input type="button" id="ok" value="OK" onclick="setok()">
+                                   
                                 </td>
                                 
                                 
@@ -354,7 +359,7 @@ function setok()
                         {% endfor %}
                         </div>
                 </table>
-            
+                <input type="button" id="ok" value="OK" onclick="setok()">
             
                 
                 <div class="row container-fluid m-0 w-100 p-0">
