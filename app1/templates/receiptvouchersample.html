@@ -287,6 +287,30 @@ function setok()
               '<div><input type="button" class="btn btn-outline-secondary ml-1" id="ok" value="OK" onclick="setok()">' +
             '<input type="button" class="btn btn-outline-secondary ml-1"  id="addrow" value="+" onclick="addmore(1)"></div><td></td>');
     }*/
+    function setcbalance()
+    {
+        
+        var b=document.getElementById("parti")
+        var sel=document.getElementById("parti").value
+        
+        for (i=1;i<=b.length;i++)
+        {
+            
+        
+            if(b.options[i].value==sel)
+            {
+                j=i
+                j=j+1
+                
+            var val= b.options[j].value
+            document.getElementById('curbal').value=val
+            
+        }
+        }
+       
+       
+       
+    }
 </script> 
   <div class="m-0" style="width: 800px;margin-left: 100px;">
      <!---->
@@ -353,7 +377,28 @@ function setok()
                             <tr>
                                <td>1</td>
                                 <td>
-                                
+                                    <select name="particular[]" id="parti" class="form-control" onchange="setcbalance()">
+                                        <option>select</option>
+                                        {% for i in ledger %}
+                                            <option value="{{ i.name}}" >
+                                                {{ i.name }}
+
+                                            </option>
+                                    <option  hidden value="{{i.opening_blnc}}">
+                                        {{ i.opening_blnc }}
+                                    </option>
+                                        {% endfor %}
+                                    </select>
+                                    <div class="col-sm-12 m-1 p-0" id="curdiv" > <label >Cur Bal :</label>
+                                   
+                                        <input type="text" id="curbal" style="width:100px" name="curbal[]"  readonly>
+       
+                                        <input type="text" name="dr[]" id="dr" style="width:50px" value="Dr"   readonly >
+                                       </div>
+
+
+                                    
+                                    <!--------
                                 <input type="text" id="particular" name="particular[]" class="form-control" placeholder="" onclick="showparticular()" style="width: 200px;">
                                 
                                 <div class="col-sm-12 m-1 p-0"> <label >Cur Bal :</label>
@@ -361,7 +406,7 @@ function setok()
 
                                  <input type="text" name="dr[]" id="dr" style="width:50px" value="Dr"   readonly >
                                 </div>
-                               
+                            -->
                                 </td>
                               
                         <td>
@@ -379,7 +424,7 @@ function setok()
                             </td>
                                 
                                 
-                                    <td style="border: none;"><input type="button" class="btn btn-outline-secondary ml-1" id="ok" value="OK" onclick="setok()"></td>
+                                    <td style="border: none;"><a role="button" class="btn btn-outline-secondary ml-1" id="ok" onclick="setok()">OK</a></td>
                                    <!-- <input type="button" role="button" id="ok" value="OK" onclick="setok()"> -->
                                 </td>
                                 
@@ -391,10 +436,11 @@ function setok()
                           
         
                         </tbody>
-                      
+              <!--        
 <tr>
     <td style="border: none;"><a class="btn btn-outline-secondary ml-1" role="button" id="addrow" onclick="add_item_row()">+</a></td>
 </tr>
+-->
                         <td>
 
 

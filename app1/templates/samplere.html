@@ -134,13 +134,13 @@ $(document).ready(function() {
         
     }
     function setparticulars(names,id){
+        j=0
+        for (var i = 0; i <= 4; i++) {
+        document.getElementById("particular '+ j +'").value=names;
 
-       /* for (var i = 0; i <= 4; i++) {
-        document.getElementById('particular').value=names;
-
-        document.getElementById('curbal').value=id
+        document.getElementById('curbal + j +').value=id
         }
-*/
+
          /*particular[particular.length]=names
          cbalance[cbalance.length]=id
          alert(particular)
@@ -157,7 +157,7 @@ $(document).ready(function() {
         document.getElementById('particular')[j].innerHTML=names 
         document.getElementById('curbal').hidden=false
         document.getElementById('curbal').value=id */
-        document.querySelector("#particular").value=names
+        document.querySelector("#particular1").value=names
         var array=document.g("#").value
          alert(array)
 
@@ -251,11 +251,9 @@ function setok()
            
             }
             document.getElementById('ledger').hidden=true
-            setup_rows()
             documentg.getElementById('total').value=amount;
-            
-           /* addmore(1)
-           
+            addmore(1)
+          /*  setup_rows()
            document.getElementById('tbodys').hidden=false
 
             document.getElementById('curbal').value=balance
@@ -275,7 +273,7 @@ function setok()
             */
         }
 
-   /* function addmore(i)
+    function addmore(i)
     {
         $('#atable').append('<div  class="col-sm-12 m-1 p-0"><input type="text" class="form-control" id="particular' + i + '" name="particular" onclick="showparticular()" style="width: 200px;">' +
             '<div  class="col-sm-12 m-1 p-0"><input type="text" name="amount[]" id="amount' + i +'" class="form-control" placeholder="0" style="width: 100px;margin-top: 0px;">'+
@@ -286,7 +284,7 @@ function setok()
                                  '<div class="row container-fluid  p-0 style="margin-left:100px" ><input type="text" name="amount[]" id="amount' + i +'" class="form-control" placeholder="0" style="width: 100px;margin-top: 0px;"></div></td>' +
               '<div><input type="button" class="btn btn-outline-secondary ml-1" id="ok" value="OK" onclick="setok()">' +
             '<input type="button" class="btn btn-outline-secondary ml-1"  id="addrow" value="+" onclick="addmore(1)"></div><td></td>');
-    }*/
+    }
 </script> 
   <div class="m-0" style="width: 800px;margin-left: 100px;">
      <!---->
@@ -351,15 +349,16 @@ function setok()
         
                         <tbody  name="tbody" id="tbody">
                             <tr>
-                               <td>1</td>
+                               
                                 <td>
                                 
-                                <input type="text" id="particular" name="particular[]" class="form-control" placeholder="" onclick="showparticular()" style="width: 200px;">
+                                <input type="text" id="particular1" name="particular[]" class="form-control" placeholder="" onclick="showparticular()" style="width: 200px;">
                                 
                                 <div class="col-sm-12 m-1 p-0"> <label >Cur Bal :</label>
                                  <input type="text" id="curbal" style="width:100px" name="curbal[]"  readonly>
 
                                  <input type="text" name="dr[]" id="dr" style="width:50px" value="Dr"   readonly >
+                                 <input type="text" name="amount[]" id="amount" class="form-control" placeholder="0"  style="width: 100px;margin-top: -50px;margin-left: 400px;">
                                 </div>
                                
                                 </td>
@@ -370,14 +369,14 @@ function setok()
                         <td>
                     
                         </td>
-                                <td>
+                               <!-- <td>
                                     <div class="row container-fluid  p-0" >
                                     
                                 <input type="text" name="amount[]" id="amount" class="form-control" placeholder="0"  style="width: 100px;margin-top: 0px;">
                                     </div>   
                                     
                             </td>
-                                
+                        -->
                                 
                                     <td style="border: none;"><input type="button" class="btn btn-outline-secondary ml-1" id="ok" value="OK" onclick="setok()"></td>
                                    <!-- <input type="button" role="button" id="ok" value="OK" onclick="setok()"> -->
@@ -391,14 +390,13 @@ function setok()
                           
         
                         </tbody>
-                      
-<tr>
-    <td style="border: none;"><a class="btn btn-outline-secondary ml-1" role="button" id="addrow" onclick="add_item_row()">+</a></td>
-</tr>
+                        <tr>
+                            <td style="border: none;"><input type="button" class="btn btn-outline-secondary ml-1"  name="addrow" id="addrow" value="+" onclick="addmore(1)"></td>
+                        </tr>
                         <td>
 
 
-                        
+                        <div class="append p-0" id="atable"></div>
                         </td>
                       <!--  <tbody hidden name="tbodys" id="tbodys">
                             <tr>
@@ -596,14 +594,7 @@ function setok()
  <script>
     document.getElementById("currentDate").innerHTML=new Date().toDateString();
     
-    
-    function setpaymentnumber()
-    {
-        a=1
-        v=document.getElementById('payment').value
-        no=v+a
-        document.getElementById('payment').value=no
-    }
+ 
     
 function setDate(){
     document.getElementById("currentDate").innerHTML= document.getElementById('enterDate').value;
