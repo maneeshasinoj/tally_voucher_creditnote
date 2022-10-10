@@ -9,6 +9,16 @@
             justify-content: center;
             
         }
+        .party {
+    
+            position: fixed;
+            top: 150px;
+            right: 15px;
+            border: 1px solid #f1f1f1;
+            z-index: 9;
+            width: 300px;
+            height: 550px;
+    }
     </style>
 
 <script>
@@ -54,29 +64,55 @@
         {
             document.getElementById('tbody').hidden=false
         
-            document.getElementById('party').hidden=false
+            document.getElementById('ledger').hidden=false
             
         }
         function showparticular()
         {
             
         
-            document.getElementById('ledger').hidden=false
-            document.getElementById('party').hidden=true
+            document.getElementById('ledger').hidden=true
+            document.getElementById('ledger1').hidden=false
             
             
         }
        
-        function showparticular1()
+        function showparticular1(id)
         {
             
-        
-            document.getElementById('ledger1').hidden=false
-            document.getElementById('party').hidden=true
-            document.getElementById('ledger').hidden=true
+        if(id==2)
+        {
+            document.getElementById('ledger2').hidden=false
+            document.getElementById('ledger1').hidden=true
+            
             
         }
-  
+        else if(id==3)
+        {
+            
+            document.getElementById('ledger2').hidden=true
+            document.getElementById('ledger3').hidden=false
+        
+            
+        }
+        else if(id==4)
+        {
+            
+            document.getElementById('ledger3').hidden=true
+            document.getElementById('ledger4').hidden=false
+        
+            
+        }
+        else if(id==5)
+        {
+            
+            document.getElementById('ledger4').hidden=true
+            document.getElementById('ledger5').hidden=false
+        
+            
+        }
+
+    }
       
     
   function setledger(names,id){
@@ -88,7 +124,7 @@
        
         
     }
-    function setparticulars(names,id){
+    function setparticulars1(names,id){
         
         document.getElementById('particular').value=names;
         document.getElementById('curbal').hidden=false
@@ -97,60 +133,207 @@
        
         
     }
-    function setparticulars1(names,id){
-      
+    function setparticulars2(names,id){
+    
       document.getElementById('particulars').value=names;
       
-      document.getElementById('curbal1').hidden=false
-      document.getElementById('curbal1').value=id
+      document.getElementById('curbal2').hidden=false
+      document.getElementById('curbal2').value=id
 
 
      
       
   }
-  function setok1()
+  function setparticulars3(names,id){
+      
+      document.getElementById('particular3').value=names;
+      
+      document.getElementById('curbal3').hidden=false
+      document.getElementById('curbal3').value=id
+
+
+     
+      
+  }
+  function setparticulars4(names,id){
+      
+      document.getElementById('particular4').value=names;
+      
+      document.getElementById('curbal4').hidden=false
+      document.getElementById('curbal4').value=id
+    
+      
+  }
+  function setparticulars5(names,id){
+      
+      document.getElementById('particular5').value=names;
+      
+      document.getElementById('curbal5').hidden=false
+      document.getElementById('curbal5').value=id
+    
+      
+  }
+  function setok5()
   {
-      document.getElementById('ledger').hidden=true
-      document.getElementById('ledger1').hidden=false
+    document.getElementById('ledger4').hidden=true
+      document.getElementById('ledger5').hidden=false
+      
       currntbal=Number(document.getElementById('currentbalance').value)
-            amount=Number(document.getElementById('amount1').value);
-            curbalnce=Number(document.getElementById('curbal1').value)
+            amount=Number(document.getElementById('amount5').value);
+            curbalnce=Number(document.getElementById('curbal5').value)
+            total=Number(document.getElementById('total').value)
             balance=curbalnce-amount     
             bal=currntbal+amount;
-            document.getElementById('total').value=amount
+            total=total+amount
+            document.getElementById('total').value=total
             if (balance<0)
             {
                 bl=curbalnce+amount
                 
-                document.getElementById('curbal1').value=bl
-                document.getElementById('curbal1').style.color = "#ff0000";
+                document.getElementById('curbal5').value=bl
+                document.getElementById('curbal5').style.color = "#ff0000";
                 document.getElementById('currentbalance').value=bal
-                document.getElementById('dr1').value="Cr"
-                document.getElementById('dr1').style.color = "#ff0000";
-                document.getElementById('total').value=amount
+                document.getElementById('dr5').value="Cr"
+                document.getElementById('dr5').style.color = "#ff0000";
+                
                 
             }
             else if(balance>0){
                 document.getElementById('currentbalance').value=bal
-                document.getElementById('curbal1').value=balance
-                document.getElementById('total').value=amount
+                document.getElementById('curbal5').value=balance
+                document.getElementById('total').value=total
 
             }
             else{
                  document.getElementById('currentbalance').value=bal
-                document.getElementById('curbal1').value=balance
-                document.getElementById('total').value=amount
+                document.getElementById('curbal5').value=balance
+                document.getElementById('total').value=total
            
             }
-      amount=Number(document.getElementById('amount').value)
-      amount1=Number(document.getElementById('amount1').value)
+  }
+  function setok4()
+  {
+    document.getElementById('ledger3').hidden=true
+      document.getElementById('ledger4').hidden=false
+      document.getElementById('tbody5').hidden=false
+      currntbal=Number(document.getElementById('currentbalance').value)
+            amount=Number(document.getElementById('amount4').value);
+            curbalnce=Number(document.getElementById('curbal4').value)
+            total=Number(document.getElementById('total').value)
+            balance=curbalnce-amount     
+            bal=currntbal+amount;
+            total=total+amount
+            document.getElementById('total').value=total
+            if (balance<0)
+            {
+                bl=curbalnce+amount
+                
+                document.getElementById('curbal4').value=bl
+                document.getElementById('curbal4').style.color = "#ff0000";
+                document.getElementById('currentbalance').value=bal
+                document.getElementById('dr4').value="Cr"
+                document.getElementById('dr4').style.color = "#ff0000";
+                
+                
+            }
+            else if(balance>0){
+                document.getElementById('currentbalance').value=bal
+                document.getElementById('curbal4').value=balance
+                document.getElementById('total').value=total
+
+            }
+            else{
+                 document.getElementById('currentbalance').value=bal
+                document.getElementById('curbal4').value=balance
+                document.getElementById('total').value=total
+           
+            }
+  }
+  function setok3()
+  {
+    document.getElementById('ledger2').hidden=true
+      document.getElementById('ledger3').hidden=false
+      document.getElementById('tbody4').hidden=false
+      currntbal=Number(document.getElementById('currentbalance').value)
+            amount=Number(document.getElementById('amount3').value);
+            curbalnce=Number(document.getElementById('curbal3').value)
+            total=Number(document.getElementById('total').value)
+            balance=curbalnce-amount     
+            bal=currntbal+amount;
+            total=total+amount
+            document.getElementById('total').value=total
+            if (balance<0)
+            {
+                bl=curbalnce+amount
+                
+                document.getElementById('curbal3').value=bl
+                document.getElementById('curbal3').style.color = "#ff0000";
+                document.getElementById('currentbalance').value=bal
+                document.getElementById('dr3').value="Cr"
+                document.getElementById('dr3').style.color = "#ff0000";
+                
+                
+            }
+            else if(balance>0){
+                document.getElementById('currentbalance').value=bal
+                document.getElementById('curbal3').value=balance
+                document.getElementById('total').value=total
+
+            }
+            else{
+                 document.getElementById('currentbalance').value=bal
+                document.getElementById('curbal3').value=balance
+                document.getElementById('total').value=total
+           
+            }
+  }
+  function setok2()
+  {
+      document.getElementById('ledger').hidden=true
+      document.getElementById('ledger2').hidden=false
+      document.getElementById('tbody3').hidden=false
+      currntbal=Number(document.getElementById('currentbalance').value)
+            amount=Number(document.getElementById('amount2').value);
+            curbalnce=Number(document.getElementById('curbal2').value)
+            total=Number(document.getElementById('total').value)
+            balance=curbalnce-amount     
+            bal=currntbal+amount;
+            total=total+amount
+            if (balance<0)
+            {
+                bl=curbalnce+amount
+                
+                document.getElementById('curbal2').value=bl
+                document.getElementById('curbal2').style.color = "#ff0000";
+                document.getElementById('currentbalance').value=bal
+                document.getElementById('dr2').value="Cr"
+                document.getElementById('dr2').style.color = "#ff0000";
+                document.getElementById('total').value=total
+                
+            }
+            else if(balance>0){
+                document.getElementById('currentbalance').value=bal
+                document.getElementById('curbal2').value=balance
+                document.getElementById('total').value=total
+
+            }
+            else{
+                 document.getElementById('currentbalance').value=bal
+                document.getElementById('curbal2').value=balance
+                document.getElementById('total').value=total
+           
+            }
+      /*amount=Number(document.getElementById('total').value)
+      amount1=Number(document.getElementById('amount2').value)
       currntbal=Number(document.getElementById('currentbalance').value)
       currntbal=currntbal-amount1
       total=amount+amount1
       document.getElementById('total').value=total
-      document.getElementById('currentbalance').value=currtbal
+      document.getElementById('currentbalance').value=currtbal */
+      
+      
   }
-function setok()
+function setok1()
         {
             currntbal=Number(document.getElementById('currentbalance').value)
             amount=Number(document.getElementById('amount').value);
@@ -292,7 +475,7 @@ function setok()
                             </td>
                                 
                                 <td>
-                                    <input type="button" id="ok" value="OK" onclick="setok()">
+                                    <input type="button" id="ok" value="OK" onclick="setok1()">
                                 </td>
                                 
                                 
@@ -315,11 +498,11 @@ function setok()
                         <tbody hidden name="tbodys" id="tbodys">
                             <tr>
                                 <td>
-                                <input type="text" id="particulars" name="particulars" class="form-control" placeholder="" onclick="showparticular1()" style="width: 200px;">
+                                <input type="text" id="particulars" name="particulars" class="form-control" placeholder="" onclick="showparticular1(2)" style="width: 200px;">
                                 <div class="col-sm-12 m-1 p-0"> <label >Cur Bal :</label>
-                                    <input type="text" id="curbal1" style="width:100px" name="curbal1"  readonly>
+                                    <input type="text" id="curbal2" style="width:100px" name="curbal2"  readonly>
    
-                                    <input type="text" name="dr1" id="dr1" style="width:50px" value="Dr"   readonly >
+                                    <input type="text" name="dr2" id="dr2" style="width:50px" value="Dr"   readonly >
                                    </div>
                                 </td>
                               
@@ -330,11 +513,11 @@ function setok()
 
                         </td>
                                 <td>
-                                <input type="text" name="amount1" id="amount1" class="form-control" placeholder="0"  style="width: 100px;">
+                                <input type="text" name="amount2" id="amount2" class="form-control" placeholder="0"  style="width: 100px;">
                                 </td>
                                 
                                 <td>
-                                    <input type="button" id="ok" value="OK" onclick="setok1()">
+                                    <input type="button" id="ok" value="OK" onclick="setok2()">
                                 </td>
                                 
                                 
@@ -353,6 +536,108 @@ function setok()
                           
         
                         </tbody>
+                        <tbody hidden name="tbody3" id="tbody3">
+                            <tr>
+                                <td>
+                                <input type="text" id="particular3" name="particular3" class="form-control" placeholder="" onclick="showparticular1(3)" style="width: 200px;">
+                                <div class="col-sm-12 m-1 p-0"> <label >Cur Bal :</label>
+                                    <input type="text" id="curbal3" style="width:100px" name="curbal3"  readonly>
+   
+                                    <input type="text" name="dr3" id="dr3" style="width:50px" value="Dr"   readonly >
+                                   </div>
+                                </td>
+                              
+                        <td>
+
+                        </td>
+                        <td>
+
+                        </td>
+                                <td>
+                                <input type="text" name="amount3" id="amount3" class="form-control" placeholder="0"  style="width: 100px;">
+                                </td>
+                                
+                                <td>
+                                    <input type="button" id="ok" value="OK" onclick="setok3()">
+                                </td>
+                                
+                                
+                            </tr>
+                            <tr>
+                                
+                                <!--
+                                <td class="w-75 m-0 p-0 pl-3" style="cursor: pointer;"><a>August</a></td>
+                                <td class="w-25 m-0 p-0 text-center">dfs</td> -->
+                            </tr>
+                            <tr>
+                                <!--
+                                <td class="w-75 m-0 p-0 pl-3" style="cursor: pointer;"><a>September</a></td>
+                                <td class="w-25 m-0 p-0 text-center">dfs</td> -->
+                            </tr>
+                          
+        
+                        </tbody>
+                        <tbody hidden name="tbody4" id="tbody4">
+                            <tr>
+                                <td>
+                                <input type="text" id="particular4" name="particular4" class="form-control" placeholder="" onclick="showparticular1(4)" style="width: 200px;">
+                                <div class="col-sm-12 m-1 p-0"> <label >Cur Bal :</label>
+                                    <input type="text" id="curbal4" style="width:100px" name="curbal4"  readonly>
+   
+                                    <input type="text" name="dr4" id="dr4" style="width:50px" value="Dr"   readonly >
+                                   </div>
+                                </td>
+                              
+                        <td>
+
+                        </td>
+                        <td>
+
+                        </td>
+                                <td>
+                                <input type="text" name="amount4" id="amount4" class="form-control" placeholder="0"  style="width: 100px;">
+                                </td>
+                                
+                                <td>
+                                    <input type="button" id="ok" value="OK" onclick="setok4()">
+                                </td>
+                                
+                                
+                            </tr>
+                            
+                        </tbody>
+                        <tbody hidden name="tbody5" id="tbody5">
+                            <tr>
+                                <td>
+                                <input type="text" id="particular5" name="particular5" class="form-control" placeholder="" onclick="showparticular1(5)" style="width: 200px;">
+                                <div class="col-sm-12 m-1 p-0"> <label >Cur Bal :</label>
+                                    <input type="text" id="curbal5" style="width:100px" name="curbal5"  readonly>
+   
+                                    <input type="text" name="dr5" id="dr5" style="width:50px" value="Dr"   readonly >
+                                   </div>
+                                </td>
+                              
+                        <td>
+
+                        </td>
+                        <td>
+
+                        </td>
+                                <td>
+                                <input type="text" name="amount5" id="amount5" class="form-control" placeholder="0"  style="width: 100px;">
+                                </td>
+                                
+                                <td>
+                                    <input type="button" id="ok" value="OK" onclick="setok5()">
+                                </td>
+                                
+                                
+                            </tr>
+                           
+                          
+        
+                        </tbody>
+                        
                         
                         </div>
                 </table>
@@ -388,17 +673,17 @@ function setok()
   
 
             
-           
+           <!--
                 
        
 
                 
-                <!-- Listing -->
+                Listing 
               
-                <div id="party" hidden class="row container " style="margin-block-start: -490px;margin-left: 230px;justify-content: end;">
+                <div id="party" hidden class="party" style="margin-block-start: -490px;margin-left: 230px;justify-content: end;">
                     <div class="col-sm-6 m-1 p-1"></div>
                     <div class="col-sm-4 m-1 p-1" style=" background-color:rgba(0,0,0,0.2); height: 400px; padding-bottom: 10px;">
-                        <!-- <a href="javascript:history.go(-1);" class="close">+</a> -->
+                        <!-- <a href="javascript:history.go(-1);" class="close">+</a> 
 
                         
                     <div  class="bg-info text-light">List of Ledger Accounts</div>
@@ -431,12 +716,12 @@ function setok()
                     
            </div>    
         
-            <!-- Listing -->
+            <!-- Listing 
               
-            <div id="ledger" hidden class="row container " style="margin-block-start: -490px;margin-left: 230px;justify-content: end;">
+            <div id="ledger" hidden class="party" style="background-color:  #213b52; color:white;">
                 <div class="col-sm-8 m-1 p-1"></div>
-                <div class="col-sm-4 m-1 p-1" style=" background-color:rgba(0,0,0,0.2); height: 400px; padding-bottom: 10px;">
-                    <!-- <a href="javascript:history.go(-1);" class="close">+</a> -->
+                <div class="col-sm-4 m-1 p-1" >
+                    <!-- <a href="javascript:history.go(-1);" class="close">+</a> 
 
                     
                 <div  class="bg-info text-light">List of Ledger Account</div>
@@ -472,7 +757,7 @@ function setok()
        <div id="ledger1" hidden class="row container " style="margin-block-start: -690px;margin-left: 230px;justify-content: end;">
         <div class="col-sm-8 m-1 p-1"></div>
         <div class="col-sm-4 m-1 p-1" style=" background-color:rgba(0,0,0,0.2); height: 400px; padding-bottom: 10px;">
-            <!-- <a href="javascript:history.go(-1);" class="close">+</a> -->
+            <!-- <a href="javascript:history.go(-1);" class="close">+</a> 
 
             
         <div  class="bg-info text-light">List of Ledger Account</div>
@@ -504,8 +789,260 @@ function setok()
             </div>
         
 </div>     
+ 
+<div id="ledger3" hidden class="row container " style="margin-block-start: -690px;margin-left: 230px;justify-content: end;">
+    <div class="col-sm-8 m-1 p-1"></div>
+    <div class="col-sm-4 m-1 p-1" style=" background-color:rgba(0,0,0,0.2); height: 400px; padding-bottom: 10px;">
+        <!-- <a href="javascript:history.go(-1);" class="close">+</a> 
+
         
-       
+    <div  class="bg-info text-light">List of Ledger Account</div>
+    <div style="text-align: right;" id="currentDate"></div>
+           <div>
+               <table>
+                <br>
+                
+                <tr>
+                    <div style="text-align: right;margin-right: 20px;"><a href="{% url 'create_ledger' %}">Create</a></div>   
+                    
+                    </tr>
+                    <tr>
+                        <div style="text-align: right;margin-right: 20px;"><a href="{% url 'alter_company' %}">Back</a></div>   
+                        
+                    </tr>
+                    <hr style="width:100%;text-align:left;margin-left:0">
+                    {% for i in ledger %}
+                
+                    <tr>
+                    <div style="margin-left: 25px;"><a onclick="setparticulars3('{{ i.name }}','{{i.opening_blnc}}');">{{i.name}}</a></div>
+                    </tr>
+                    
+                    {% endfor %}
+                    
+                    
+               </table>
+           </div>
+        </div>
+    
+</div>     
+-->
+<div class="party" id="ledger" hidden style="background-color:  #213b52; color:white;" >
+
+
+    <h6 style="background-color:rgb(17, 169, 240) ;color:white">List of Ledgers Account</h6>
+      <button type="button" class="btn cancel close" onclick="closeForm()">X</button>
+
+
+  <hr >
+  <div >
+      <table >
+      <tr >
+          <div style="text-align: right;margin-right: 20px;"><a href="{% url 'create_ledger' %}">Create</a></div>   
+                  
+      </tr>
+      <tr>
+          <div style="text-align: right;margin-right: 20px;"><a href="{% url 'alter_company' %}">Back</a></div>   
+          
+      </tr>
+      <hr style="width:100%;text-align:left;margin-left:0">
+      {% for i in ledger %}
+      {% if i.under == "Bank_Accounts" %}
+  
+      <tr>
+      <div style="margin-left: 25px;"><a onclick="setledger('{{ i.name }}','{{i.opening_blnc}}');">{{i.name}}</a></div>
+      </tr>
+      {% endif %}
+      {% endfor %}
+      
+      
+ </table>
+</div>
+</div>
+
+</div>     
+
+
+</div>
+<div class="party" id="ledger1" hidden style="background-color:  #213b52; color:white;" >
+
+
+    <h6 style="background-color:rgb(17, 169, 240) ;color:white">List of Ledgers Account</h6>
+      <button type="button" class="btn cancel close" onclick="closeForm()">X</button>
+
+
+  <hr >
+  <div >
+      <table >
+      <tr >
+          <div style="text-align: right;margin-right: 20px;"><a href="{% url 'create_ledger' %}">Create</a></div>   
+                  
+      </tr>
+      <tr>
+          <div style="text-align: right;margin-right: 20px;"><a href="{% url 'alter_company' %}">Back</a></div>   
+          
+      </tr>
+      <hr style="width:100%;text-align:left;margin-left:0">
+      {% for i in ledger %}
+  
+      <tr>
+      <div style="margin-left: 25px;"><a onclick="setparticulars1('{{ i.name }}','{{i.opening_blnc}}');">{{i.name}}</a></div>
+      </tr>
+      
+      {% endfor %}
+      
+      
+ </table>
+</div>
+</div>
+
+</div>     
+
+
+</div>
+<div class="party" id="ledger2" hidden style="background-color:  #213b52; color:white;" >
+
+
+    <h6 style="background-color:rgb(17, 169, 240) ;color:white">List of Ledgers Account</h6>
+      <button type="button" class="btn cancel close" onclick="closeForm()">X</button>
+
+
+  <hr >
+  <div >
+      <table >
+      <tr >
+          <div style="text-align: right;margin-right: 20px;"><a href="{% url 'create_ledger' %}">Create</a></div>   
+                  
+      </tr>
+      <tr>
+          <div style="text-align: right;margin-right: 20px;"><a href="{% url 'alter_company' %}">Back</a></div>   
+          
+      </tr>
+      <hr style="width:100%;text-align:left;margin-left:0">
+      {% for i in ledger %}
+  
+      <tr>
+      <div style="margin-left: 25px;"><a onclick="setparticulars2('{{ i.name }}','{{i.opening_blnc}}');">{{i.name}}</a></div>
+      </tr>
+      
+      {% endfor %}
+      
+      
+ </table>
+</div>
+</div>
+
+</div>     
+
+
+</div>
+<div class="party" id="ledger3"  hidden style="background-color:  #213b52; color:white;" >
+
+
+      <h6 style="background-color:rgb(17, 169, 240) ;color:white">List of Ledgers Account</h6>
+        <button type="button" class="btn cancel close" onclick="closeForm()">X</button>
+ 
+
+    <hr >
+    <div >
+        <table >
+        <tr >
+            <div style="text-align: right;margin-right: 20px;"><a href="{% url 'create_ledger' %}">Create</a></div>   
+                    
+        </tr>
+        <tr>
+            <div style="text-align: right;margin-right: 20px;"><a href="{% url 'alter_company' %}">Back</a></div>   
+            
+        </tr>
+        <hr style="width:100%;text-align:left;margin-left:0">
+        {% for i in ledger %}
+    
+        <tr>
+        <div style="margin-left: 25px;"><a onclick="setparticulars3('{{ i.name }}','{{i.opening_blnc}}');">{{i.name}}</a></div>
+        </tr>
+        
+        {% endfor %}
+        
+        
+   </table>
+</div>
+</div>
+
+</div>     
+
+
+</div>
+<div class="party" id="ledger4"  hidden style="background-color:  #213b52; color:white;" >
+
+
+    <h6 style="background-color:rgb(17, 169, 240) ;color:white">List of Ledgers Account</h6>
+      <button type="button" class="btn cancel close" onclick="closeForm()">X</button>
+
+
+  <hr >
+  <div >
+      <table >
+      <tr >
+          <div style="text-align: right;margin-right: 20px;"><a href="{% url 'create_ledger' %}">Create</a></div>   
+                  
+      </tr>
+      <tr>
+          <div style="text-align: right;margin-right: 20px;"><a href="{% url 'alter_company' %}">Back</a></div>   
+          
+      </tr>
+      <hr style="width:100%;text-align:left;margin-left:0">
+      {% for i in ledger %}
+  
+      <tr>
+      <div style="margin-left: 25px;"><a onclick="setparticulars4('{{ i.name }}','{{i.opening_blnc}}');">{{i.name}}</a></div>
+      </tr>
+      
+      {% endfor %}
+      
+      
+ </table>
+</div>
+</div>
+
+</div>     
+
+
+</div>
+<div class="party" id="ledger5"  hidden style="background-color:  #213b52; color:white;" >
+
+
+    <h6 style="background-color:rgb(17, 169, 240) ;color:white">List of Ledgers Account</h6>
+      <button type="button" class="btn cancel close" onclick="closeForm()">X</button>
+
+
+  <hr >
+  <div >
+      <table >
+      <tr >
+          <div style="text-align: right;margin-right: 20px;"><a href="{% url 'create_ledger' %}">Create</a></div>   
+                  
+      </tr>
+      <tr>
+          <div style="text-align: right;margin-right: 20px;"><a href="{% url 'alter_company' %}">Back</a></div>   
+          
+      </tr>
+      <hr style="width:100%;text-align:left;margin-left:0">
+      {% for i in ledger %}
+  
+      <tr>
+      <div style="margin-left: 25px;"><a onclick="setparticulars5('{{ i.name }}','{{i.opening_blnc}}');">{{i.name}}</a></div>
+      </tr>
+      
+      {% endfor %}
+      
+      
+ </table>
+</div>
+</div>
+
+</div>     
+
+
+</div>
  <script>
     document.getElementById("currentDate").innerHTML=new Date().toDateString();
     function setpaymentnumber()

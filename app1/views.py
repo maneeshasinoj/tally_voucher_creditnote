@@ -10330,16 +10330,19 @@ def receipt_voucher(request):
 
 def add_paymentvoucher(request):
     
-   
     if request.method=='POST' :
         
-        item = request.POST['particular']
+        item1 = request.POST['particular']
+        amount1=request.POST['amount']
+        item2 = request.POST['particular2']
+        amount2=request.POST['amount2']
         vouchno=request.POST['payment']
             
-        amount=request.POST['total']
+        total=request.POST['total']
         date=datetime.today() 
         
-        payment=paymentvoucher(date=date,particulars=item,voucherno=vouchno,vouchertype="Payment",debitamount=amount)
+        payment=paymentvoucher(date=date,particulars1=item1,voucherno=vouchno,vouchertype="Payment",debitamount=total,
+                                amount1=amount1,particulars2=item2,amount2=amount2)
         payment.save()
         currentbalance=request.POST['currentbalance']
         account=request.POST['ledgeraccount']
