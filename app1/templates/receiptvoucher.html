@@ -289,7 +289,7 @@
   }
   function setok2()
   {
-      document.getElementById('ledger').hidden=true
+      document.getElementById('ledger1').hidden=true
       document.getElementById('ledger2').hidden=false
       document.getElementById('tbody3').hidden=false
       currntbal=Number(document.getElementById('currentbalance').value)
@@ -385,12 +385,12 @@ function setok1()
             */
         }
 </script> 
-  <div class="m-0" style="width: 800px;margin-left: 100px;">
+  <div class="m-0" style="width: 1000px;margin-left: 100px;">
      <!---->
        
     <h6 class="bg-info text-light p-1 m-1 text-left">Accounting Voucher Creation</h6>
     
-    <div  style="text-align: center;margin-top:-30px;font-weight:900">{{com.name}}</div>
+    <div  style="text-align: center;margin-top:-30px;font-weight:900">{{cmp.name}}</div>
     <div style="text-align: right;margin-top:-25px;margin-right:180px;font-weight:900" id="currentDate"></div>
 
             <form  style="background-color:rgba(0,0,0,.4);" method="post" action="{% url 'add_receiptvoucher' %}">
@@ -846,7 +846,7 @@ function setok1()
       </tr>
       <hr style="width:100%;text-align:left;margin-left:0">
       {% for i in ledger %}
-      {% if i.under == "Bank_Accounts" %}
+      {% if i.under == "Bank_Accounts" and "Cash_in_Hand" %}
   
       <tr>
       <div style="margin-left: 25px;"><a onclick="setledger('{{ i.name }}','{{i.opening_blnc}}');">{{i.name}}</a></div>

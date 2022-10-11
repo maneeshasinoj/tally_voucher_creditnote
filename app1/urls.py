@@ -657,7 +657,8 @@ urlpatterns = [
     path('add_paymentvoucher',views.add_paymentvoucher,name='add_paymentvoucher'),
     path('receipt_voucher',views.receipt_voucher,name='receipt_voucher'),
     path('add_receiptvoucher',views.add_receiptvoucher,name='add_receiptvoucher'),
-    path('paymentvouchersample',views.paymentvouchersample,name='paymentvouchersample'), 
+     
+    path('list_of_paymentvoucher',views.list_of_paymentvoucher,name='list_of_paymentvoucher'),
      path('samplereceipt',views.samplereceipt,name='samplereceipt'),
     path('sample_receipt',views.sample_receipt,name='sample_receipt'),
     

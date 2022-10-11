@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 import datetime
 import random
 import re
@@ -10321,39 +10322,86 @@ def payment_voucher(request):
         return render(request,'paymentvoucher.html',{'ledger':ledger,'cmp':cmp,'no':no})
 
 def receipt_voucher(request):
-    ledger=tally_ledger.objects.all()
-    receipt=receiptvoucher.objects.last()
-    no=receipt.id
-    no=no+1
-    print(no)
-    return render(request,'receiptvoucher.html',{'ledger':ledger,'no':no})
+
+    if 't_id' in request.session:
+        if request.session.has_key('t_id'):
+            t_id = request.session['t_id']
+        else:
+            return redirect('/')
+        cmp=Companies.objects.get(id=t_id)
+        ledger=tally_ledger.objects.all()
+        receipt=receiptvoucher.objects.last()
+        no=receipt.id
+        no=no+1
+        print(no)
+        return render(request,'receiptvoucher.html',{'cmp':cmp,'ledger':ledger,'no':no})
 
 def add_paymentvoucher(request):
     
     if request.method=='POST' :
         
-        item1 = request.POST['particular']
-        amount1=request.POST['amount']
-        item2 = request.POST['particular2']
-        amount2=request.POST['amount2']
-        vouchno=request.POST['payment']
-            
-        total=request.POST['total']
+        
         date=datetime.today() 
-        
-        payment=paymentvoucher(date=date,particulars1=item1,voucherno=vouchno,vouchertype="Payment",debitamount=total,
-                                amount1=amount1,particulars2=item2,amount2=amount2)
+        vouchno=request.POST['payment']
+        account=request.POST['ledgeraccount'] 
+        currentbalance=request.POST['currentbalance'] 
+        cr=request.POST['cr'] 
+        total=request.POST['total']       
+        item1 = request.POST['particular']
+        curbal1=request.POST['curbal']
+        cr1=request.POST['dr']
+        amount1=request.POST['amount']
+        item2 = request.POST['particulars']
+        curbal2=request.POST['curbal2']
+        cr2=request.POST['dr2']
+        amount2=request.POST['amount2']
+        item3=request.POST['particular3']
+        curbal3=request.POST['curbal3']
+        cr3=request.POST['dr3']
+        amount3=request.POST['amount3']
+        item4=request.POST['particular4']
+        curbal4=request.POST['curbal4']
+        cr4=request.POST['dr4']
+        amount4=request.POST['amount4']
+        item5=request.POST['particular5']
+        curbal5=request.POST['curbal5']
+        cr5=request.POST['dr5']
+        amount5=request.POST['amount5']
+
+
+        payment=paymentvoucher(date=date,accountname=account,dr_cr=cr,particulars1=item1,voucherno=vouchno,vouchertype="Payment",debitamount=total,
+                                amount1=amount1,particulars2=item2,amount2=amount2,particulars3=item3,particulars4=item4,particulars5=item5,amount3=amount3,amount4=amount4,amount5=amount5,dr_cr1=cr1,
+                                dr_cr2=cr2,dr_cr3=cr3,dr_cr4=cr4,dr_cr5=cr5,currentbalance=currentbalance,curbalance1=curbal1,curbalance2=curbal2,
+                                curbalance3=curbal3,curbalance4=curbal4,curbalance5=curbal5)
         payment.save()
-        currentbalance=request.POST['currentbalance']
-        account=request.POST['ledgeraccount']
-        particular=request.POST['particular']
-        curbal=request.POST['curbal']
+       
         tally_ledger.objects.filter(name=account).update(opening_blnc=currentbalance)
-        tally_ledger.objects.filter(name=particular).update(opening_blnc=curbal)
-        #ledger.opening_blnc=currentbalance
-        
-       # print(ledger.opening_blnc)
-       # ledger.save()
+        tally_ledger.objects.filter(name=item1).update(opening_blnc=curbal1)
+
+        if item2!=NULL :
+            try:
+                curbal2=int(curbal2)
+                tally_ledger.objects.filter(name=item2).update(opening_blnc=curbal2)
+            except :
+                curbal2=None
+        if item3!=NULL :
+            try:
+                curbal3=int(curbal3)
+                tally_ledger.objects.filter(name=item3).update(opening_blnc=curbal3)
+            except :
+                curbal3=None
+        if item4!=NULL :
+            try:
+                curbal4=int(curbal4)
+                tally_ledger.objects.filter(name=item4).update(opening_blnc=curbal4)
+            except :
+                curbal4=None
+        if item5!=NULL :
+            try:
+                curbal5=int(curbal5)
+                tally_ledger.objects.filter(name=item5).update(opening_blnc=curbal5)
+            except :
+                curbal5=None
         print('hiii')
         return redirect('payment_voucher')
     return render(request,'index.html')
@@ -10361,35 +10409,78 @@ def add_paymentvoucher(request):
 def add_receiptvoucher(request):
     if request.method=='POST' :
         
-        item = request.POST['particular']
+        date=datetime.today()        
         vouchno=request.POST['receipt']
-            
-        amount=request.POST['total']
-        date=datetime.today() 
-        
-        receipt=receiptvoucher(date=date,particulars=item,voucherno=vouchno,vouchertype="Receipt",debitamount=amount)
-        receipt.save()
+        account=request.POST['ledgeraccount']  
         currentbalance=request.POST['currentbalance']
-        account=request.POST['ledgeraccount']
-        particular=request.POST['particular']
-        curbal=request.POST['curbal']
+        cr=request.POST['cr'] 
+        total=request.POST['total']
+        item1 = request.POST['particular']
+        curbal1=request.POST['curbal']
+        cr1=request.POST['dr']
+        amount1=request.POST['amount']
+        item2 = request.POST['particulars']
+        curbal2=request.POST['curbal2']
+        cr2=request.POST['dr2']
+        amount2=request.POST['amount2']
+        item3=request.POST['particular3']
+        curbal3=request.POST['curbal3']
+        cr3=request.POST['dr3']
+        amount3=request.POST['amount3']
+        item4=request.POST['particular4']
+        curbal4=request.POST['curbal4']
+        cr4=request.POST['dr4']
+        amount4=request.POST['amount4']
+        item5=request.POST['particular5']
+        curbal5=request.POST['curbal5']
+        cr5=request.POST['dr5']
+        amount5=request.POST['amount5']
+
+
+
+        receipt=receiptvoucher(date=date,accountname=account,dr_cr=cr,particulars1=item1,voucherno=vouchno,vouchertype="Receipt",debitamount=total,
+                                amount1=amount1,particulars2=item2,amount2=amount2,particulars3=item3,particulars4=item4,particulars5=item5,amount3=amount3,amount4=amount4,amount5=amount5,dr_cr1=cr1,
+                                dr_cr2=cr2,dr_cr3=cr3,dr_cr4=cr4,dr_cr5=cr5,currentbalance=currentbalance,curbalance1=curbal1,curbalance2=curbal2,
+                                curbalance3=curbal3,curbalance4=curbal4,curbalance5=curbal5)
+        receipt.save()
+        
         tally_ledger.objects.filter(name=account).update(opening_blnc=currentbalance)
-        tally_ledger.objects.filter(name=particular).update(opening_blnc=curbal)
+        tally_ledger.objects.filter(name=item1).update(opening_blnc=curbal1)
+        if item2!=NULL :
+            try:
+                curbal2=int(curbal2)
+                tally_ledger.objects.filter(name=item2).update(opening_blnc=curbal2)
+            except :
+                curbal2=None
+        if item3!=NULL :
+            try:
+                curbal3=int(curbal3)
+                tally_ledger.objects.filter(name=item3).update(opening_blnc=curbal3)
+            except :
+                curbal3=None
+        if item4!=NULL :
+            try:
+                curbal4=int(curbal4)
+                tally_ledger.objects.filter(name=item4).update(opening_blnc=curbal4)
+            except :
+                curbal4=None
+        if item5!=NULL :
+            try:
+                curbal5=int(curbal5)
+                tally_ledger.objects.filter(name=item5).update(opening_blnc=curbal5)
+            except :
+                curbal5=None
+                
         print('hiii')
         
         return redirect('receipt_voucher')
     return render(request,'index.html')
 
+def list_of_paymentvoucher(request):
 
-def paymentvouchersample(request):
-    ledger=tally_ledger.objects.all()
-    receipt=receiptvoucher.objects.last()
-    no=receipt.id
-    no=no+1
-    print(no)
-    
-    form=paymentvoucherform()
-    return render(request,'paymentvouchersample.html',{'form':form,'ledger':ledger,'no':no,'range':range(10)})
+    vou=Voucher.objects.all()
+    context={'vou':vou}
+    return render(request,'list_of_paymentvoucher.html',context)
 
 def samplereceipt(request):
     ledger=tally_ledger.objects.all()
