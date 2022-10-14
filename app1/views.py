@@ -10482,22 +10482,128 @@ def list_of_paymentvoucher(request):
     context={'vou':vou}
     return render(request,'list_of_paymentvoucher.html',context)
 
-def samplereceipt(request):
-    ledger=tally_ledger.objects.all()
-    receipt=receiptvoucher.objects.last()
-    no=receipt.id
-    no=no+1
-    print(no)
-    return render(request,'samplere.html',{'ledger':ledger,'no':no})
+def voucher_creditnote(request):
+    if 't_id' in request.session:
+        if request.session.has_key('t_id'):
+            t_id = request.session['t_id']
+        else:
+            return redirect('/')
+        
+        tally = Companies.objects.filter(id=t_id)
+     #   stock_allo=stock_item_allocat.objects.all()
+        gd=CreateGodown.objects.all()
+        
+        led1=tally_ledger.objects.filter(company_id=t_id)
+        vou=Voucher.objects.all()
+        vou1=Voucher.objects.filter(company_id=t_id)
+        data=stock_itemcreation.objects.all()
+    #    sales=voucher_sales.objects.last()
+        ledger=tally_ledger.objects.all()
+        credit=creditnote_voucher.objects.last()
+        no=credit.id
+        no=no+1
+        print(no)
+    return render(request,'voucher_creditnote.html',{'ledger':ledger,'led':led,
+        'led1':led1,
+        'vou':vou,
+        'vou1':vou1,
+        'tally':tally,
+        'gd':gd,
+        'data':data,
+        'no':no})
+
+def add_creditnotevoucher(request):
+    if 't_id' in request.session:
+        if request.session.has_key('t_id'):
+            t_id = request.session['t_id']
+        else:
+            return redirect('/')
+        tally = Companies.objects.filter(id=t_id)
+        if request.method=='POST':
+
+            date=datetime.today() 
+            voucherno=request.POST['credit']
+            partyname=request.POST['partyname']
+            curbal=request.POST['currentbalance']
+            dr_cr=request.POST['cr']
+            ledgeraccount=request.POST['ledger']
+            curbal1=request.POST['currentbalance2']
+            item1=request.POST['newitem']
+            quantity1=request.POST['quantity']
+            rate1=request.POST['rate']
+            per1=request.POST['per']
+            amount1=request.POST['value']
+           
+            
+            total_amount=request.POST['total_amount']
+            creditnote=creditnote_voucher(date=date,vouchertype="Credit",voucherno=voucherno,partyname=partyname,currentbalance=curbal,dr_cr=dr_cr,
+                                ledgeraccount=ledgeraccount,curbalance1=curbal1,item1=item1,quantity1=quantity1,rate1=rate1,per1=per1,amount1=amount1,
+                                creditamount=total_amount)
+            creditnote.save()
+            print("saved")
+            newcurbal=request.POST['newcurbal']
+            newcurbal1=request.POST['newcurbal1']
+            new=request.POST['newitem']
+            newqty1=request.POST['newqty1']
+            print(new)
+            print(newqty1)
+            print('hii')
+            
+            tally_ledger.objects.filter(name=partyname).update(opening_blnc=newcurbal)
+            tally_ledger.objects.filter(name=ledgeraccount).update(opening_blnc=newcurbal1)
+            stock_itemcreation.objects.filter(name=new).update(quantity=newqty1)
+            
+            return redirect('voucher_creditnote')
+        return render(request,'voucher_creditnote.html',{'tally':tally})
 
 
-def sample_receipt(request):
+def receiptdetails(request):
+    return render(request,'receiptdetails.html')
+
+def add_receiptdetails(request):
+    
+    if request.method=='POST' :
+
+        trackingno = request.POST['tracking_no']
+        dispatchno = request.POST['dispatchno']
+        dsptchthrough = request.POST['dsptchthrough']
+        destination = request.POST['destination']
+        carriername = request.POST['carriername']
+        billoflading = request.POST['billoflading']
+        motorvehicleno = request.POST['motorvehicleno']
+        date = request.POST['date']
+        invoiceno = request.POST['invoiceno']
+        invoicedate = request.POST['invoicedate']
+        data=receiptdetails_creditnote(tracking_no=trackingno,dispatch_Doc_No=dispatchno,dispatch_through=dsptchthrough,destination=destination,
+                            carrier_name=carriername,bill_of_lading_no=billoflading,date=date,motorvehicle_no=motorvehicleno,
+                            original_invoice_no=invoiceno,invoice_date=invoicedate)
+        data.save()   
+        return redirect('partydetails')    
+    return render(request,'partydetails.html')  
+
+def partydetails(request):
     ledger=tally_ledger.objects.all()
-    receipt=receiptvoucher.objects.last()
-    no=receipt.id
-    no=no+1
-    print(no)
-    return render(request,'receiptvouchersample.html',{'ledger':ledger,'no':no})
+ #   states=States.objects.all()
+    data={}
+    data['ledger']=ledger
+  #  data['states']=states
+    print(ledger)
+    return render(request,'partydetails.html',{'ledger':ledger})
+
+def add_partydetails(request):
+    com=Companies.objects.all()
+    if request.method=='POST' :
+        name=request.POST['name']  
+        mailing_address=request.POST['mailingname']     
+        address=request.POST['address']    
+        state=request.POST['state']   
+        country=request.POST['country']  
+        party=partydetails_creditnote(buyer_name=name,mailing_address=mailing_address,Address=address,state=state,country=country)  
+        party.save()
+        print("hiiiii")
+        return redirect('voucher_creditnote')
+    return render(request,'voucher_creditnote.html')
+
 
 
 

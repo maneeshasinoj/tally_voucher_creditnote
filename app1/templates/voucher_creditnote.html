@@ -1,0 +1,936 @@
+
+    {% extends 'base.html' %}
+    {% block body %}
+    
+    <style>
+        .enter{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+        }
+        .party {
+    
+    position: fixed;
+    top: 150px;
+    right: 15px;
+    border: 1px solid #f1f1f1;
+    z-index: 9;
+    width: 300px;
+    height: 550px;
+}
+.ScrollStyle{
+            /* max-height: 200px; */
+            overflow-y: scroll;
+        } 
+ .close {
+            position: absolute;
+            top: 3px;
+            right: 8px;
+            font-size: 17px;
+            transform: rotate(0deg);
+            color: rgb(255, 255, 255);
+            cursor: pointer;
+            text-decoration: none;
+        }
+  .form-popup {
+    display: none;
+            position: fixed;
+            top: 150px;
+            right: 15px;
+            border: 1px solid #f1f1f1;
+            z-index: 9;
+            width: 300px;
+            height: 550px;
+    }
+
+    .form-popup5 {
+            visibility: hidden;
+            position: absolute;
+            top: 150px;
+            right: 15px;
+            border: 1px solid #f1f1f1;
+            z-index: 9;
+            width: 300px;
+            height: 550px;
+    }
+    .form-popup2 {
+            display: none;
+            position: fixed;
+            top: 250px;
+            right: 330px;
+            border: 1px solid #f1f1f1;
+            z-index: 9;
+            width: 900px;
+            height: 200px;
+        }
+    .form-popup1 {
+    display: none;
+            position: absolute;
+            top: 22%;
+            right: 30%;
+            border: 1px solid #f1f1f1;
+            z-index: 9;
+            width: 500px;
+            height: 550px;
+    }
+
+    
+  
+    .content a:hover { background-color: rgb(238, 167, 75);}
+    
+    /* Add styles to the form container */
+    .form-container {
+      max-width: 50px;
+            height: 500px;
+            padding: 10px;
+    }
+    .form-container1 {
+      max-width: 350px;
+            height: 600px;
+            padding: 2px; 
+     
+    }
+
+
+    .form-container5 {
+      width: 450px;
+            height: 600px;
+            padding: 2px; 
+     
+    }
+   option{
+       margin-left: 10px;
+       color: black;
+   }
+   .scrollbar {
+      margin-left: 20px;
+      float: left;
+      height: 300px;
+      width: 270px;
+      background: rgb(216, 232, 238);
+      overflow-y: scroll;
+      margin-bottom: 25px;
+    }
+    
+    
+    .scrollbar-primary::-webkit-scrollbar {
+      overflow-y: scroll;
+      
+    }
+    
+    .scrollbar-primary::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      -webkit-box-shadow: inset 0 0 4px rgba(214, 57, 9, 0.1);
+      background-color: #dd9078;
+    }
+    
+    .scrollbar-primary {
+      scrollbar-color: #86d5f5 #f1f3f3;
+    }
+    .btns_prnt{
+      width: 100%;
+            cursor:pointer;
+            background-color: rgba(240, 248, 255, 0);
+            color: white;
+            border: none;
+  }
+  .btns_prnt:hover{
+    background-color:#5bc9e4;
+            color: rgb(15, 14, 14);
+  }
+  .bt{
+            text-align: end;
+        }
+    </style>
+
+<script>
+
+   
+    function showVouchers(){
+      
+      document.getElementById('voucherPop').style.visibility= "visible";
+      document.getElementById('voucherPop').style.display = "block"; 
+      document.getElementById('ledger').hidden=true
+     
+  }
+    function showVouchers(){
+        document.getElementById('voucherPop').style.visibility= "visible";
+        document.getElementById('voucherPop').style.display = "block";
+        document.getElementById('ledger').hidden=true
+     
+        
+    }
+    window.addEventListener('click',outsideClick)
+    function outsideClick(event){
+        if(event.target == document.getElementById('voucherPop')){
+            document.getElementById('voucherPop').style.display = "none"
+        }
+    }
+   /* function setVtype(name){
+        document.getElementById('voucherPop').style.display = "none"
+        document.getElementById('name').innerHTML = name
+    }*/
+    function setVtype(names){
+        if (document.getElementById('name').value==null)
+        {
+        document.getElementById('name').value=names
+        }
+        else{
+            document.getElementById('name').value=names
+        }
+        
+    }
+    function showDp(){
+        document.getElementById('dpModal').style.visibility= "visible";
+        document.getElementById('dpModal').style.display = "block";  
+    }
+    window.addEventListener('click',outsideClick1)
+    function outsideClick1(event){
+        if(event.target == document.getElementById('dpModal')){
+            document.getElementById('dpModal').style.display = "none"
+        }
+    }
+    function setPeriod(){
+        console.log('hi')
+        var f = document.getElementById('fdate').value;
+        var l = document.getElementById('ldate').value;
+        let txt1 = 'For'
+        let txt2 = 'to'
+        document.getElementById('dperiod').innerHTML = txt1.bold() + ' ' + f + ' ' + txt2.bold() + ' ' + l
+        document.getElementById('dpModal').style.display = "none"
+        
+        pdata = {firstdate:String(f),lastdate:String(l)};
+        $.ajax({
+            url : "",
+            method : "POST",
+            data : pdata,
+            dataType : "json",
+            success : function(data){
+                console.log(data)
+            }
+        });
+    }
+    function showpartyname()
+    {
+        document.getElementById('ledger').hidden=false
+        document.getElementById('currentbalance').hidden=false
+        document.getElementById('cr').hidden=false
+    }
+    function showname(){
+            
+            var name = document.getElementById("partyname");
+            var mailingname = name.value;
+            document.getElementById("mailingname").value= mailingname;
+            document.getElementById('ledger').hidden=false
+
+        }
+    function showledger()
+        {
+            document.getElementById('tbody').hidden=false
+            document.getElementById('ledger2').hidden=false
+            document.getElementById('ledger').hidden=true
+            document.getElementById('currentbalance2').hidden=false
+        document.getElementById('cr2').hidden=false
+        }
+        function showstock()
+        {
+            document.getElementById('tbody').hidden=false
+
+        }
+  
+        function setvalue(val)
+    {
+         val= document.getElementById('credit');
+         v=1;
+            v=val.value + v.value;
+            document.getElementById('credit').value=v;
+    }
+    function setstock(names)
+    {
+        document.getElementById('stock').value=names;
+  }
+  function setpartyname(names,id){
+        
+        document.getElementById('partyname').value=names;
+        document.getElementById('currentbalance').value=id
+       
+        
+    }
+    function setledger(names,id){
+        
+        document.getElementById('ledgeraccount').value=names;
+        document.getElementById('currentbalance2').value=id
+
+       
+        
+    }
+
+  function addamount(){
+    a=Number(document.getElementById('qty').value);
+    b=Number(document.getElementById('rate').value);
+    c=a*b;
+    document.getElementById('amount').value=c;
+    document.getElementById('total').value=c;
+    
+}
+function setnext()
+        {
+            document.getElementById('tbody').hidden=false
+            document.getElementById('tbodys').hidden=false
+            n=n+1;
+        }
+function showgrp3()
+{
+        
+      document.getElementById('myForm4').style.visibility= "visible";
+      document.getElementById("myForm4").style.display = "block";
+      document.getElementById('ledger2').hidden=true
+  }
+
+        function closeForm6() {
+            
+            document.getElementById('pop1').style.display="none";
+
+       
+
+            let quantity_value=document.getElementById('quantity1').value;
+            let rate_value=document.getElementById('rate1').value;
+            let per_value=document.getElementById('per1').value;
+            let total_value=document.getElementById('value1').value;
+            alert(per_value)
+            document.getElementById('quantity').value=quantity_value;
+            document.getElementById('rate').value=rate_value;
+            document.getElementById('per').value=per_value;
+            document.getElementById('value').value=total_value;
+            document.getElementById('total_amount').value=total_value;
+        }
+        function passvalue(){
+            var status = document.getElementById('name').value;
+            console.log(status);
+
+            localStorage.setItem("status",status);
+            var a = localStorage.getItem('status');
+            console.log(a);
+        }
+
+        document.getElementById("value").value = localStorage.getItem("valuepass");
+
+        function setGroup3(under,underId,qty){
+            document.getElementById('stockitem').value= under;
+            document.getElementById('myForm4').style.visibility= "hidden";
+            document.getElementsByName('underhidden').value= underId;
+            u=document.getElementById('stockitem').value;
+            alert(u)
+            document.getElementById('newqty1').value=qty;
+            alert(qty)
+            document.getElementById('newitem').value=u;
+        }    
+        function setPrimary2(){
+            document.getElementById('under6').value='primary';
+        }
+        function setmain2(){
+            document.getElementById('under6').value='Main Location';
+
+        }
+        function setvalue2(godown,godownId){
+            document.getElementById('under6').value=godown;
+          
+        }
+    function setbalance()
+    {
+        alert("hiii")
+        amount=Number(document.getElementById('total_amount').value)
+        curbal=Number(document.getElementById('currentbalance').value)
+        curbal1=Number(document.getElementById('currentbalance2').value)
+        alert(curbal)
+        newcurbal=curbal-amount
+        newcurbal1=curbal1+amount
+        document.getElementById('newcurbal').value=newcurbal
+        document.getElementById('newcurbal1').value=newcurbal1
+        alert(curbal)
+        qty=Number(document.getElementById('quantity').value)
+        alert(qty)
+        newqty=document.getElementById('newqty1').value;
+        alert(newqty)
+        newqty=newqty+qty
+        document.getElementById('newqty1').value=newqty
+        
+    }
+</script> 
+<script>
+    const popup=()=>{
+    document.getElementById('pop1').style.display="block";
+
+   let a=document.getElementById('btt').value;
+   let b=document.getElementById('bat').value;
+   let c=document.getElementById('bt').value;
+   console.log(c);
+   console.log(b);
+   console.log(a);
+
+   if (a == "Yes"){
+    document.getElementById("track").classList.remove("hide");
+    document.getElementById("track1").classList.remove("hide");
+   }
+   else{
+    document.getElementById("track").classList.add("hide");
+    document.getElementById("track1").classList.add("hide");
+
+   };
+
+   if (b == "Yes"){
+    document.getElementById("expiry").classList.remove("hide");
+    document.getElementById("expiry1").classList.remove("hide");
+
+   }
+   else{
+    document.getElementById("expiry").classList.add("hide");
+    document.getElementById("expiry1").classList.add("hide");
+
+   }
+
+   if (c == "Yes"){
+    document.getElementById("branch").classList.remove("hide");
+    document.getElementById("branch1").classList.remove("hide");
+   }
+  }
+</script>
+  <div class="m-0" style="width: 1200px;margin-left: 100px;">
+     <!---->
+       
+    <h6 class="bg-info text-light p-1 m-1 text-left">Accounting Voucher Creation</h6>
+    
+    <div  style="text-align: center;margin-top:-30px;font-weight:900">{{com.name}}</div>
+    <div style="text-align: right;margin-top:-25px;margin-right:180px;font-weight:900" id="currentDate"></div>
+
+            <form  style="background-color:rgba(0,0,0,.4);" method="post" action="{% url 'add_creditnotevoucher' %}">
+                {% csrf_token %}
+                
+               
+                <div class="row container-fluid p-0 mt-1" >
+
+                   
+                    <div class="col-sm-6 m-0 p-4">
+                       
+                        <div class="row container-fluid  p-2 m-0">
+                        
+                            <div class="col-sm-4 m-0 p-0"> <label >Credit note</label></div>
+                            <div class="col-sm-8 m-0 p-0"> 
+                            <input type="text" class="form-control" id="" value="{{no}}" name="credit" onload="setvalue(value)"></div>
+                        </div>
+    
+                       
+
+                        <div class="row container-fluid  p-2 m-0">
+                            <div class="col-sm-4 m-0 p-0"> <label >Party A/c Name</label></div>
+                            <div class="col-sm-8 m-0 p-0"><input  onclick="showpartyname()" required type="text" class="form-control" id="partyname"  placeholder="" name="partyname"></div>
+                        </div>
+                        <div class="row container-fluid  p-2 m-0">
+                            <div class="col-sm-4 m-0 p-0"> <label >Current Balance :</label></div>
+                            <div class="col-sm-4 m-0 p-0"> 
+                            
+                            <input type="text" name="currentbalance" id="currentbalance" style="width: 100px;" class="form-control" value="{{i.opening_blnc}}"  readonly hidden>
+                            </div>
+                        
+                        <div class="col-sm-4 m-0 p-0"> 
+
+                        <input type="text" name="cr" id="cr"  style="width: 50px;" class="form-control" value="Dr"  readonly hidden>
+                            </div>
+                        </div>
+                        <div class="row container-fluid  p-2 m-0">
+                            <div class="col-sm-4 m-0 p-0"> <label >Ledger Account</label></div>
+                            <div class="col-sm-8 m-0 p-0"> 
+                            <input type="text" class="form-control" id="ledgeraccount" placeholder=""   name="ledger" onclick="showledger()"></div>
+                        </div>
+                        <div class="row container-fluid  p-2 m-0">
+                            <div class="col-sm-4 m-0 p-0"> <label >Current Balance :</label></div>
+                            <div class="col-sm-4 m-0 p-0"> 
+                            
+                            <input type="text" name="currentbalance2" id="currentbalance2" style="width: 100px;" class="form-control" value="{{i.opening_blnc}}"  readonly hidden>
+                            </div>
+                        
+                        <div class="col-sm-4 m-0 p-0"> 
+
+                        <input type="text" name="cr2" id="cr2"  style="width: 50px;" class="form-control" value="Dr"  readonly hidden>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+              
+
+           <div class="row container-fluid  p-0 m-0" style=" border: 1px solid rgba(128, 128, 128, 0.6);"> 
+      <!-- <div class="col-sm-4 m-0 p-4" style=" border-right: 1px solid rgba(128, 128, 128, 0.6);">  --><!--
+                    
+
+                    <div class="row container-fluid  p-2 m-0">
+                        <div class="col-sm-6 m-0 p-0"> <label for="c">Name of Item</label></div>
+                        
+                    </div>
+                    
+                    <div class="bankac hide p-0 m-0 w-100" id="bankac" hidden>
+        
+                        <h6 class="p-3">Bank Account Details</h6>
+                
+                        <div class="row container-fluid  p-2 m-0">
+                            <div class="col-sm-6 m-0 p-0"> <label for="pan">A/c Holder's Name</label></div>
+                            <div class="col-sm-6 m-0 p-0"><input type="text" value="{{cmp.name}}" class="form-control" id="acna" placeholder="" name="holder_name"></div>
+                            
+                        </div>
+                 
+
+            </div>-->
+            <div class="row container-fluid m-0 mt-2 w-100 p-0">
+           
+                <table class="table p-0 m-0" id="pTable">
+                    
+                        <thead>
+                            <tr>
+                                <th>Name of item</th>
+                                <th>Quantity</th>
+                                <th>Rate</th>
+                                <th>per</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <div class="table" >
+                        <tbody hidden name="tbody" id="tbody">
+                            <tr>
+                                <td>
+                                <input type="text" id="stockitem" name="stockitem" class="form-control" placeholder="" onclick="showgrp3()" style="width: 200px;">
+                                </td>
+                               <!--
+                                <td class="w-100 m-0 p-0 pl-3" style="cursor: pointer;"><a type="button"> April</td></a>
+                                
+                                 <td class="w-25 m-0 p-0 text-center">dfdgfd</td> 
+                                 <td class="w-25 m-0 p-0 text-center">dfdgfd</td> 
+                                 <td class="w-25 m-0 pl-0 text-center">dfdgfd</td> -->
+                            
+                            
+                              
+                                <!--
+                                <td class="w-100 m-0 p-0 pl-3" style="cursor: pointer;"><a>May </a></td>
+                                <td class="w-25 m-0 p-0 text-center"></td> -->
+                                <td>
+                                    <input type="text" name="quantity" id="quantity" class="form-control" placeholder="0" onkeyup="addamount()" style="width: 100px;">
+                                    </td>
+                            
+                                <td>
+                                    <input type="text" class="form-control" name="rate" id="rate" placeholder="0" style="width: 100px;">
+                                    </td>
+                                    
+                                        <td><input type="text" name='per' id="per"  oninput="add_number()" class="form-control" style="width: 100px;"></td>
+                                        </td>
+                                        
+                                <!--
+                                <td class="w-100 m-0 p-0 pl-3" style="cursor: pointer;"><a>June</a></td>
+                                <td class="w-25 m-0 p-0 text-center">dfs</td> -->
+                        
+                                <td>
+                                <input type="text" name="value" id="value" class="form-control" placeholder="0"  style="width: 100px;">
+                                </td>
+                                <td>
+                                    <input type="button" id="next" onclick="setbalance()">OK</button>
+                                </td>
+                                <!--
+                                <td class="w-75 m-0 p-0 pl-3" style="cursor: pointer;"><a>July</a></td>
+                                <td class="w-25 m-0 p-0 text-center">dfs</td> -->
+                            </tr>
+                           
+                        </tbody>
+                
+            
+                    
+                        <tbody hidden name="tbodys" id="tbodys">
+                            <tr>
+                                <td>
+                                <input type="text" id="stockitems" name="stockitems" class="form-control" placeholder="" onclick="showgrp3()" style="width: 200px;">
+                                </td>
+                               <!--
+                                <td class="w-100 m-0 p-0 pl-3" style="cursor: pointer;"><a type="button"> April</td></a>
+                                
+                                 <td class="w-25 m-0 p-0 text-center">dfdgfd</td> 
+                                 <td class="w-25 m-0 p-0 text-center">dfdgfd</td> 
+                                 <td class="w-25 m-0 pl-0 text-center">dfdgfd</td> -->
+                            
+                            
+                              
+                                <!--
+                                <td class="w-100 m-0 p-0 pl-3" style="cursor: pointer;"><a>May </a></td>
+                                <td class="w-25 m-0 p-0 text-center"></td> -->
+                            
+                            
+                                <td>
+                                    <input type="number" class="form-control" name="rates" id="rates" placeholder="0" style="width: 100px;">
+                                    </td>
+                                    <td>
+                                        <select class="form-control" name="select" >
+                                            {% for units in unit %}
+                                            <option value="{{ category.id }}">{{ units.symbol }}</option>
+                                            {% endfor %}
+                                        </select>
+                                        </td>
+                                        <td>
+                                            <input type="number" name="quantitys" id="quantitys" class="form-control" placeholder="0"  oninput="add_number()"  style="width: 100px;">
+                                            </td>
+                                <!--
+                                <td class="w-100 m-0 p-0 pl-3" style="cursor: pointer;"><a>June</a></td>
+                                <td class="w-25 m-0 p-0 text-center">dfs</td> -->
+                        
+                                <td>
+                                <input type="number" name="values" id="values" oninput="add()" class="form-control" placeholder="0"  style="width: 100px;">
+                                </td>
+                                <td>
+                                    <button id="next" onclick="setnext()">Next</button>
+                                </td>
+                                <!--
+                                <td class="w-75 m-0 p-0 pl-3" style="cursor: pointer;"><a>July</a></td>
+                                <td class="w-25 m-0 p-0 text-center">dfs</td> -->
+                            </tr>
+                        </div>
+                          
+        
+                        </tbody>
+                    </table>
+    
+                
+                </div>
+                <div class="row container-fluid m-0 w-100 p-0">
+                    <table class="table p-0 m-0">
+                        <tbody>
+                            <tr>
+                                <td class="w-75 m-0 p-0 pl-3">Grand Total</td>
+                                <td class="w-25 m-0 p-0 text-center"><input type="text" name="total_amount" class="form-control" placeholder="00" id="total_amount" readonly></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>   
+                    
+                <input type="text" name="newcurbal" class="form-control"  id="newcurbal"  hidden  readonly>
+                <input type="text" name="newcurbal1" class="form-control"   id="newcurbal1" hidden readonly>
+                <input type="text" name="newitem" class="form-control"   id="newitem" hidden readonly> 
+                <input type="text" name="newqty1" class="form-control"   id="newqty1" hidden readonly> 
+
+            
+            <div class="enter w-100 py-4"><button class="btn btn-info w-25 px-4">SAVE</button></div>  
+          
+        </form>
+    </div>
+    
+                
+       <!--
+
+                
+                 Listing 
+              
+                <div id="party" hidden class="row container " style="margin-block-start: -390px;margin-left: 530px;justify-content: end;">
+                    <div class="col-sm-6 m-1 p-1"></div>
+                    <div class="col-sm-6 m-1 p-1" style=" background-color:rgba(0,0,0,0.2); height: 400px; padding-bottom: 10px;">
+                        <!-- <a href="javascript:history.go(-1);" class="close">+</a> 
+
+                        
+                    <div  class="bg-info text-light">List of Ledger Accounts</div>
+                    <div style="text-align: right;" id="currentDate"></div>
+                           <div>
+                               <table>
+                                <br>
+                                
+                                <tr>
+                                    <div style="text-align: right;margin-right: 20px;"><a href="">Create</a></div>   
+                                    
+                                    </tr>
+                                    <tr>
+                                        <div style="text-align: right;margin-right: 20px;"><a href="">Back</a></div>   
+                                        
+                                    </tr>
+                                    <hr style="width:100%;text-align:left;margin-left:0">
+                                    {% for i in ledger %}
+                                        {% if i.under == "Sundry_Creditors" %}
+                                    <tr>
+                                    <div style="margin-left: 25px;"><a href="{% url 'receiptdetails' %}" onclick="setVtype('{{ i.name }}');">{{i.name}}</a></div>
+                                    </tr>
+                                    {% endif %}
+                                    {% endfor %}
+                                    
+                                    
+                               </table>
+                           </div>
+                        </div>
+                    
+           </div>    
+            <!-- Listing 
+              
+            <div id="ledger" hidden class="row container " style="margin-block-start: -390px;margin-left: 530px;justify-content: end;">
+                <div class="col-sm-6 m-1 p-1"></div>
+                <div class="col-sm-6 m-1 p-1" style=" background-color:rgba(0,0,0,0.2); height: 400px; padding-bottom: 10px;">
+                    <!-- <a href="javascript:history.go(-1);" class="close">+</a> 
+
+                    
+                <div  class="bg-info text-light">List of Ledger Account</div>
+                <div style="text-align: right;" id="currentDate"></div>
+                       <div>
+                           <table>
+                            <br>
+                            
+                            <tr>
+                                <div style="text-align: right;margin-right: 20px;"><a href="">Create</a></div>   
+                                
+                                </tr>
+                                <tr>
+                                    <div style="text-align: right;margin-right: 20px;"><a href="">Back</a></div>   
+                                    
+                                </tr>
+                                <hr style="width:100%;text-align:left;margin-left:0">
+                                {% for i in ledger %}
+                                    {% if i.under == "Sundry_Creditors" %}
+                                <tr>
+                                <div style="margin-left: 25px;"><a onclick="setledger('{{ i.name }}');">{{i.name}}</a></div>
+                                </tr>
+                                {% endif %}
+                                {% endfor %}
+                                
+                                
+                           </table>
+                       </div>
+                    </div>
+                
+       </div>    
+    -->
+    <div class="party" id="ledger" hidden style="background-color:  #213b52; color:white;" >
+
+
+        <h6 style="background-color:rgb(17, 169, 240) ;color:white">List of Ledgers Account</h6>
+          <button type="button" class="btn cancel close" onclick="closeForm()">X</button>
+    
+    
+      <hr >
+      <div >
+          <table >
+          <tr >
+              <div style="text-align: right;margin-right: 20px;"><a href="{% url 'create_ledger' %}">Create</a></div>   
+                      
+          </tr>
+          <tr>
+              <div style="text-align: right;margin-right: 20px;"><a href="{% url 'alter_company' %}">Back</a></div>   
+              
+          </tr>
+          <hr style="width:100%;text-align:left;margin-left:0">
+          {% for i in ledger %}
+          {% if i.under == "Bank_Accounts" and "Cash_in_Hand" %}
+      
+          <tr>
+          <div style="margin-left: 25px;"><a onclick="setpartyname('{{ i.name }}','{{i.opening_blnc}}');">{{i.name}}</a></div>
+          </tr>
+          {% endif %}
+          {% endfor %}
+          
+          
+     </table>
+    </div>
+    </div>
+    
+    </div>     
+</div>
+<div class="party" id="ledger2" hidden style="background-color:  #213b52; color:white;" >
+
+
+    <h6 style="background-color:rgb(17, 169, 240) ;color:white">List of Ledgers Account</h6>
+      <button type="button" class="btn cancel close" onclick="closeForm()">X</button>
+
+
+  <hr >
+  <div >
+      <table >
+      <tr >
+          <div style="text-align: right;margin-right: 20px;"><a href="{% url 'create_ledger' %}">Create</a></div>   
+                  
+      </tr>
+      <tr>
+          <div style="text-align: right;margin-right: 20px;"><a href="{% url 'alter_company' %}">Back</a></div>   
+          
+      </tr>
+      <hr style="width:100%;text-align:left;margin-left:0">
+      {% for i in ledger %}
+      {% if i.under == "Sales_Accounts" %}
+  
+      <tr>
+      <div style="margin-left: 25px;"><a onclick="setledger('{{ i.name }}','{{i.opening_blnc}}');">{{i.name}}</a></div>
+      </tr>
+      {% endif %}
+      {% endfor %}
+      
+      
+ </table>
+</div>
+</div>
+
+</div>     
+</div>
+    <!--
+           <div class="row container">  
+            <div class="modal" id="voucherPop" style="width: 260px;height: 800px; margin-left: 890px;margin-top: 150px;">
+                <div class="modal-content">
+                    <div class="modal-header bg-info ">
+                        <h6 class="modal-title ml-3">List of Stock Items</h6>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text-right"><a  style="cursor: pointer;" class="text-dark">Create</a></div>
+                        <hr class="mt-0 border-dark">
+                        <ul class="list-group">
+                            {% for s in stock %}
+                            <li class="list-group-item" onclick="setstock('{{ s.name }}');">{{ s.name }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div> 
+            
+        </div>
+    -->
+    <div class="form-popup ScrollStyle" id="myForm4" style="background-color:  #213b52; color:white;" >
+        <form action="" class="form-container1" >
+      
+          <h6 style="background-color:rgb(17, 169, 240) ;color:white">List of Stock items</h6>
+            <button type="button" class="btn cancel close" onclick="closeForm3()">X</button>
+            <a  href="" style="margin-left:180px; cursor:pointer; color: white" >Create New</a>  
+      
+        <hr >
+        <div >
+            <table >
+            <tr >
+      
+            {% for i in data %}
+           
+  
+            <a  class="btns_prnt" onclick="setGroup3('{{i.name}}','{{i.id}}','{{i.quantity}}'); popup();"  class="content " 
+            style="cursor:pointer;color:white">&nbsp;&nbsp;{{i.name}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{i.quantity}}{{i.per}}</a><br>
+            
+            {% endfor %}
+
+            
+            </tr>
+            </table>
+        </div>
+        <input type="text" name="underhidden" hidden value="{{i.id}}">
+        </form>
+      </div>
+      
+      
+    
+    <div class="form-popup5 ScrollStyle" id="underForm2" style="background-color: #213b52" >
+        <form action="" class="form-container1" >
+            <h6 style="background-color:rgb(17, 169, 240) ;color:white text">List of Godowns</h6>
+            <button type="button" class="btn cancel close" onclick="closeForm5()">X</button>
+            <a href="{% url 'godown_alt' %}" style="cursor:pointer" class="btn bt btns_prnt" role="button">Create</a>  
+            <hr>
+            <div>
+                <table>
+                    <tr>
+                        <option onclick="setPrimary2()" class="btns_prnt">&nbsp;&nbsp;Primary</option>
+                        <option onclick="setmain2()" class="btns_prnt">&nbsp;&nbsp;Main Location</option>
+                        
+                        {% for l in gd %}
+                            <option onclick="setvalue2('{{l.name}}','{{l.id}}')" class="btns_prnt">&nbsp;&nbsp;{{l.name}}</option>
+                        {% endfor %}
+                    </tr>
+                </table>
+            </div>
+            <input type="text" name="underhidden" hidden value="{{l.id}}">
+        </form>
+        
+    </div>
+
+
+    
+      
+    <div class="form-popup2 m-3" id="pop1">
+        <div class="row bg-info text-light p-2 m-0">
+            <div class="col-md-6"><b>Stock Item Allocation</b></div>
+            <div class="col-md-6">
+                {% for i in tally %}
+                {{i.name}}
+            {% endfor %}
+            </div>
+        </div>
+        <div class="p-3" style="background-color:rgb(5, 1, 1);">
+            
+            <div class="table-responsive-sm" style="background-color:rgba(0,0,0,0.4);">
+                <Table class="w-100 table text-center" border="1">
+                    <tr>
+                        <!-- <th>Sl.no</th> -->
+                        <th>Godown</th>
+                        <th>Quantity</th>
+                        <th>Rate</th>
+                        <th>Per</th>
+                        <th>Amount</th>
+                        <th>Accept</th>
+        
+                    </tr>
+                    
+                    <tr>
+                      <td> 
+                        <input type="text" id="under6"  class="form-control" onclick="tap()">
+                        </td>
+                      
+                      <td><input type="text" class="w-100 form-control" id="quantity1" onblur="passquantity()"> </td>
+                      <td> <input type="text" class="w-100 form-control" id="rate1" onblur="passrate()"></td>
+                      <td><input type="text" class="w-100 form-control" id="per1" onblur="passper()"> </td>
+                      <td> <input type="text" class="w-100 form-control" id="value1" onblur="passvalue()"></td>
+                      
+                      <td><a href="#"><button onclick="closeForm6()" class="btn btn-info">Accept</button></a></td> 
+            
+                    </tr>
+                    
+                    
+                </Table>
+            </div>
+            
+        </div>
+     
+   
+    </div> 
+ <script>
+    document.getElementById("currentDate").innerHTML=new Date().toDateString();
+    document.getElementById('party').hidden=false
+   </script> 
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+          <script>
+              
+            function tap(){
+                          document.getElementById('underForm2').style.visibility= "visible";
+                          console.log("clicked")
+                          }
+            function tap1(){
+                          document.getElementById('underForm3').style.visibility= "visible";
+                          console.log("clicked")
+                          }
+            
+
+            $('#quantity1, #rate1, #per1').on('input',function(){
+            var quantity = parseFloat($('#quantity1').val()) || 0;
+            var rate = parseFloat($('#rate1').val()) || 0;
+            var per = $('#per1').val();
+            $('#value1').val(quantity * rate);    
+        });
+
+        $('#quantity3, #rate3').on('input',function(){
+            var quantity4 = parseFloat($('#quantity3').val()) || 0;
+            var rate4 = parseFloat($('#rate3').val()) || 0;
+            $('#value3').val(quantity4 * rate4);    
+        });
+        
+        $('#value1').on('input',function(){
+            var quantity5 = parseFloat($('#value1').val()) || 0;
+            
+            $('#total_amount').val(quantity5);    
+        });
+          </script>           
+            
+            
+<script>
+function setDate(){
+    document.getElementById("currentDate").innerHTML= document.getElementById('enterDate').value;
+}
+ </script>
+    {% endblock %}

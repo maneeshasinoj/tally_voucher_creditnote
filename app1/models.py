@@ -941,7 +941,7 @@ class stock_itemcreation(models.Model):
     typ_sply=models.CharField(max_length=100)
     set_alter=models.CharField(max_length=100)
     rate_of_duty=models.IntegerField()
-    quantity=models.CharField(max_length=100,null=True)
+    quantity=models.IntegerField(null=True)
     rate=models.CharField(max_length=100,null=True)
     per=models.CharField(max_length=100,null=True)
     value=models.CharField(max_length=100,null=True)
@@ -2279,4 +2279,46 @@ class receiptvoucher(models.Model):
     voucherno=models.IntegerField()
     debitamount=models.IntegerField(null=True)
     creditamount=models.IntegerField(null=True)
+
+
+class receiptdetails_creditnote(models.Model):
+    tracking_no=models.CharField(max_length=225)
+    dispatch_Doc_No=models.CharField(max_length=225)
+    dispatch_through=models.CharField(max_length=225)
+    destination=models.CharField(max_length=225)
+    carrier_name=models.CharField(max_length=225)
+    bill_of_lading_no=models.CharField(max_length=225)
+    date=models.DateField()
+    motorvehicle_no=models.CharField(max_length=225)
+    original_invoice_no=models.CharField(max_length=225)
+    invoice_date=models.DateField()
+    ledger = models.ForeignKey(Ledger, on_delete=models.CASCADE, blank=True,null=True)
+    voucher=models.ForeignKey(Voucher,on_delete=models.CASCADE,blank=True,null=True)
+
+class partydetails_creditnote(models.Model):
+    buyer_name=models.CharField(max_length=255)
+    mailing_address=models.CharField(max_length=255)
+    Address=models.CharField(max_length=255)
+    state=models.CharField(max_length=255)
+    country=models.CharField(max_length=255)
+
+class creditnote_voucher(models.Model):
+    date=models.DateField()
+    partyname=models.CharField(max_length=255,null=True)
+    currentbalance=models.IntegerField(null=True)
+    dr_cr=models.CharField(max_length=10,null=True)
+    ledgeraccount=models.CharField(max_length=255,null=True)
+    curbalance1=models.IntegerField(null=True)
+    dr_cr1=models.CharField(max_length=10,null=True)
+    vouchertype=models.CharField(max_length=255)
+    voucherno=models.IntegerField()
+    debitamount=models.IntegerField(null=True)
+    creditamount=models.IntegerField(null=True)
+    item1=models.CharField(max_length=225,default=True)
+    quantity1=models.IntegerField(null=True) 
+    rate1=models.IntegerField(null=True)
+    per1=models.CharField(max_length=100,default=True)
+    amount1=models.IntegerField(null=True)
+    narration=models.CharField(max_length=225,default=True)
+    
 

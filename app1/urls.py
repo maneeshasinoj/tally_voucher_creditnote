@@ -659,7 +659,11 @@ urlpatterns = [
     path('add_receiptvoucher',views.add_receiptvoucher,name='add_receiptvoucher'),
      
     path('list_of_paymentvoucher',views.list_of_paymentvoucher,name='list_of_paymentvoucher'),
-     path('samplereceipt',views.samplereceipt,name='samplereceipt'),
-    path('sample_receipt',views.sample_receipt,name='sample_receipt'),
+    path('voucher_creditnote',views.voucher_creditnote,name='voucher_creditnote'),
+    path('receiptdetails',views.receiptdetails,name='receiptdetails'),
+    path('add_receiptdetails',views.add_receiptdetails,name='add_receiptdetails'),
+    path('partydetails',views.partydetails,name='partydetails'),
+    path('add_partydetails',views.add_partydetails,name='add_partydetails'),
+    path('add_creditnotevoucher',views.add_creditnotevoucher,name='add_creditnotevoucher'),
     
 ]
