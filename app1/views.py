@@ -10578,8 +10578,8 @@ def add_receiptdetails(request):
                             carrier_name=carriername,bill_of_lading_no=billoflading,date=date,motorvehicle_no=motorvehicleno,
                             original_invoice_no=invoiceno,invoice_date=invoicedate)
         data.save()   
-        return redirect('partydetails')    
-    return render(request,'partydetails.html')  
+    #    return redirect('partydetails')    
+#    return render(request,'partydetails.html')  
 
 def partydetails(request):
     ledger=tally_ledger.objects.all()

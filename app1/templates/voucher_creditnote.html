@@ -43,7 +43,28 @@
             width: 300px;
             height: 550px;
     }
-
+    .form-popup4 {
+            display: none;
+            position: absolute;
+            top: 150px;
+            right: 530px;
+            border: 1px solid #f1f1f1;
+            z-index: 9;
+            width: 900px;
+            height: 500px;
+            color: black;
+        }
+        .form-popup9 {
+            display: none;
+            position: absolute;
+            top: 150px;
+            right: 530px;
+            border: 1px solid #f1f1f1;
+            z-index: 9;
+            width: 900px;
+            height: 500px;
+            color: black;
+        }
     .form-popup5 {
             visibility: hidden;
             position: absolute;
@@ -106,7 +127,7 @@
    .scrollbar {
       margin-left: 20px;
       float: left;
-      height: 300px;
+      height: 500px;
       width: 270px;
       background: rgb(216, 232, 238);
       overflow-y: scroll;
@@ -171,14 +192,13 @@
         document.getElementById('voucherPop').style.display = "none"
         document.getElementById('name').innerHTML = name
     }*/
-    function setVtype(names){
-        if (document.getElementById('name').value==null)
-        {
-        document.getElementById('name').value=names
-        }
-        else{
-            document.getElementById('name').value=names
-        }
+    
+    function setVtype(names)
+    {
+        document.getElementById('names').value=names
+        var name = document.getElementById('names');
+            var mailingname = name.value;
+            document.getElementById('mailingname').value= mailingname;
         
     }
     function showDp(){
@@ -211,6 +231,29 @@
             }
         });
     }
+    function closeForm() {
+        document.getElementById("ledger").style.display = "none";
+        }
+        function closeForm1() {
+        document.getElementById("ledger2").style.display = "none";
+        }
+
+        function closeForm2() {
+        document.getElementById("myForm3").style.display = "none";
+        }
+
+        function closeForm3() {
+        document.getElementById("myForm4").style.display = "none";
+        }
+
+        function closeForm4() {
+        document.getElementById("myForm5").style.display = "none";
+        }
+        
+        function closeForm5() {
+        document.getElementById("underForm2").style.display = "none";
+        }
+
     function showpartyname()
     {
         document.getElementById('ledger').hidden=false
@@ -287,6 +330,18 @@ function showgrp3()
       document.getElementById("myForm4").style.display = "block";
       document.getElementById('ledger2').hidden=true
   }
+  function closeForm8() {
+            
+            document.getElementById('pop4').style.display="none";
+            document.getElementById('ledger').hidden=true;
+            document.getElementById('ledger3').hidden=false;
+  }
+  function closeForm9() {
+            
+            document.getElementById('pop9').style.display="none";
+            document.getElementById('ledger3').hidden=true;
+  }
+
 
         function closeForm6() {
             
@@ -298,7 +353,7 @@ function showgrp3()
             let rate_value=document.getElementById('rate1').value;
             let per_value=document.getElementById('per1').value;
             let total_value=document.getElementById('value1').value;
-            alert(per_value)
+            
             document.getElementById('quantity').value=quantity_value;
             document.getElementById('rate').value=rate_value;
             document.getElementById('per').value=per_value;
@@ -321,9 +376,9 @@ function showgrp3()
             document.getElementById('myForm4').style.visibility= "hidden";
             document.getElementsByName('underhidden').value= underId;
             u=document.getElementById('stockitem').value;
-            alert(u)
+            
             document.getElementById('newqty1').value=qty;
-            alert(qty)
+            
             document.getElementById('newitem').value=u;
         }    
         function setPrimary2(){
@@ -339,23 +394,24 @@ function showgrp3()
         }
     function setbalance()
     {
-        alert("hiii")
+        document.getElementById('tbody2').hidden=false;
         amount=Number(document.getElementById('total_amount').value)
         curbal=Number(document.getElementById('currentbalance').value)
         curbal1=Number(document.getElementById('currentbalance2').value)
-        alert(curbal)
+        
         newcurbal=curbal-amount
         newcurbal1=curbal1+amount
         document.getElementById('newcurbal').value=newcurbal
         document.getElementById('newcurbal1').value=newcurbal1
-        alert(curbal)
+        
         qty=Number(document.getElementById('quantity').value)
-        alert(qty)
-        newqty=document.getElementById('newqty1').value;
-        alert(newqty)
+        
+        newqty=Number(document.getElementById('newqty1').value);
+        
         newqty=newqty+qty
         document.getElementById('newqty1').value=newqty
         
+
     }
 </script> 
 <script>
@@ -395,8 +451,125 @@ function showgrp3()
     document.getElementById("branch1").classList.remove("hide");
    }
   }
+ 
+  const popup1=()=>{
+    document.getElementById('pop4').style.display="block";
+
+   let a=document.getElementById('btt').value;
+   let b=document.getElementById('bat').value;
+   let c=document.getElementById('bt').value;
+   console.log(c);
+   console.log(b);
+   console.log(a);
+
+   if (a == "Yes"){
+    document.getElementById("track").classList.remove("hide");
+    document.getElementById("track1").classList.remove("hide");
+   }
+   else{
+    document.getElementById("track").classList.add("hide");
+    document.getElementById("track1").classList.add("hide");
+
+   };
+
+   if (b == "Yes"){
+    document.getElementById("expiry").classList.remove("hide");
+    document.getElementById("expiry1").classList.remove("hide");
+
+   }
+   else{
+    document.getElementById("expiry").classList.add("hide");
+    document.getElementById("expiry1").classList.add("hide");
+
+   }
+
+   if (c == "Yes"){
+    document.getElementById("branch").classList.remove("hide");
+    document.getElementById("branch1").classList.remove("hide");
+   }
+  } 
+
+ 
 </script>
-  <div class="m-0" style="width: 1200px;margin-left: 100px;">
+
+<script>
+
+
+    const popup2=()=>{
+        document.getElementById('pop9').style.display="block";
+    
+       let a=document.getElementById('btt').value;
+       let b=document.getElementById('bat').value;
+       let c=document.getElementById('bt').value;
+       console.log(c);
+       console.log(b);
+       console.log(a);
+    
+       if (a == "Yes"){
+        document.getElementById("track").classList.remove("hide");
+        document.getElementById("track1").classList.remove("hide");
+       }
+       else{
+        document.getElementById("track").classList.add("hide");
+        document.getElementById("track1").classList.add("hide");
+    
+       };
+    
+       if (b == "Yes"){
+        document.getElementById("expiry").classList.remove("hide");
+        document.getElementById("expiry1").classList.remove("hide");
+    
+       }
+       else{
+        document.getElementById("expiry").classList.add("hide");
+        document.getElementById("expiry1").classList.add("hide");
+    
+       }
+    
+       if (c == "Yes"){
+        document.getElementById("branch").classList.remove("hide");
+        document.getElementById("branch1").classList.remove("hide");
+       }
+      }
+    
+  const popup3=()=>{
+    document.getElementById('pop2').style.display="block";
+
+   let a=document.getElementById('btt').value;
+   let b=document.getElementById('bat').value;
+   let c=document.getElementById('bt').value;
+   console.log(c);
+   console.log(b);
+   console.log(a);
+
+   if (a == "Yes"){
+    document.getElementById("track").classList.remove("hide");
+    document.getElementById("track1").classList.remove("hide");
+   }
+   else{
+    document.getElementById("track").classList.add("hide");
+    document.getElementById("track1").classList.add("hide");
+
+   };
+
+   if (b == "Yes"){
+    document.getElementById("expiry").classList.remove("hide");
+    document.getElementById("expiry1").classList.remove("hide");
+
+   }
+   else{
+    document.getElementById("expiry").classList.add("hide");
+    document.getElementById("expiry1").classList.add("hide");
+
+   }
+
+   if (c == "Yes"){
+    document.getElementById("branch").classList.remove("hide");
+    document.getElementById("branch1").classList.remove("hide");
+   }
+  }
+</script>    
+  <div class="m-0" style="width: 1000px;margin-left: 100px;">
      <!---->
        
     <h6 class="bg-info text-light p-1 m-1 text-left">Accounting Voucher Creation</h6>
@@ -404,7 +577,7 @@ function showgrp3()
     <div  style="text-align: center;margin-top:-30px;font-weight:900">{{com.name}}</div>
     <div style="text-align: right;margin-top:-25px;margin-right:180px;font-weight:900" id="currentDate"></div>
 
-            <form  style="background-color:rgba(0,0,0,.4);" method="post" action="{% url 'add_creditnotevoucher' %}">
+            <form  style="background-color:rgba(0,0,0,.4);" method="post" action="{% url 'add_creditnotevoucher' %}" id="creditnoteform">
                 {% csrf_token %}
                 
                
@@ -531,7 +704,7 @@ function showgrp3()
                                 <input type="text" name="value" id="value" class="form-control" placeholder="0"  style="width: 100px;">
                                 </td>
                                 <td>
-                                    <input type="button" id="next" onclick="setbalance()">OK</button>
+                                    <input type="button" id="next" onclick="setbalance()" value="OK">
                                 </td>
                                 <!--
                                 <td class="w-75 m-0 p-0 pl-3" style="cursor: pointer;"><a>July</a></td>
@@ -542,53 +715,39 @@ function showgrp3()
                 
             
                     
-                        <tbody hidden name="tbodys" id="tbodys">
+                        <tbody hidden name="tbody2" id="tbody2">
+                           
                             <tr>
                                 <td>
-                                <input type="text" id="stockitems" name="stockitems" class="form-control" placeholder="" onclick="showgrp3()" style="width: 200px;">
+                                <input type="text" id="stockitem2" name="stockitem2" class="form-control" placeholder="" onclick="showgrp3()" style="width: 200px;">
                                 </td>
-                               <!--
-                                <td class="w-100 m-0 p-0 pl-3" style="cursor: pointer;"><a type="button"> April</td></a>
-                                
-                                 <td class="w-25 m-0 p-0 text-center">dfdgfd</td> 
-                                 <td class="w-25 m-0 p-0 text-center">dfdgfd</td> 
-                                 <td class="w-25 m-0 pl-0 text-center">dfdgfd</td> -->
-                            
-                            
-                              
-                                <!--
-                                <td class="w-100 m-0 p-0 pl-3" style="cursor: pointer;"><a>May </a></td>
-                                <td class="w-25 m-0 p-0 text-center"></td> -->
-                            
+                               
+                                <td>
+                                    <input type="text" name="quantity2" id="quantity2" class="form-control" placeholder="0" onkeyup="addamount()" style="width: 100px;">
+                                    </td>
                             
                                 <td>
-                                    <input type="number" class="form-control" name="rates" id="rates" placeholder="0" style="width: 100px;">
+                                    <input type="text" class="form-control" name="rate2" id="rate2" placeholder="0" style="width: 100px;">
                                     </td>
-                                    <td>
-                                        <select class="form-control" name="select" >
-                                            {% for units in unit %}
-                                            <option value="{{ category.id }}">{{ units.symbol }}</option>
-                                            {% endfor %}
-                                        </select>
+                                    
+                                        <td><input type="text" name='per2' id="per2"  oninput="add_number()" class="form-control" style="width: 100px;"></td>
                                         </td>
-                                        <td>
-                                            <input type="number" name="quantitys" id="quantitys" class="form-control" placeholder="0"  oninput="add_number()"  style="width: 100px;">
-                                            </td>
+                                        
                                 <!--
                                 <td class="w-100 m-0 p-0 pl-3" style="cursor: pointer;"><a>June</a></td>
                                 <td class="w-25 m-0 p-0 text-center">dfs</td> -->
                         
                                 <td>
-                                <input type="number" name="values" id="values" oninput="add()" class="form-control" placeholder="0"  style="width: 100px;">
+                                <input type="text" name="value2" id="value2" class="form-control" placeholder="0"  style="width: 100px;">
                                 </td>
                                 <td>
-                                    <button id="next" onclick="setnext()">Next</button>
+                                    <input type="button" id="next" onclick="setbalance1()" value="OK">
                                 </td>
                                 <!--
                                 <td class="w-75 m-0 p-0 pl-3" style="cursor: pointer;"><a>July</a></td>
                                 <td class="w-25 m-0 p-0 text-center">dfs</td> -->
                             </tr>
-                        </div>
+                           
                           
         
                         </tbody>
@@ -601,19 +760,20 @@ function showgrp3()
                         <tbody>
                             <tr>
                                 <td class="w-75 m-0 p-0 pl-3">Grand Total</td>
-                                <td class="w-25 m-0 p-0 text-center"><input type="text" name="total_amount" class="form-control" placeholder="00" id="total_amount" readonly></td>
+                                <td class="w-25 m-0 p-0 text-center"><input type="text" name="total_amounts" class="form-control" placeholder="00" id="total_amounts" readonly></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>   
                     
-                <input type="text" name="newcurbal" class="form-control"  id="newcurbal"  hidden  readonly>
-                <input type="text" name="newcurbal1" class="form-control"   id="newcurbal1" hidden readonly>
+                <input type="text" name="newcurbal" class="form-control"  id="newcurbal" hidden   readonly>
+                <input type="text" name="newcurbal1" class="form-control"   id="newcurbal1"  hidden readonly>
                 <input type="text" name="newitem" class="form-control"   id="newitem" hidden readonly> 
                 <input type="text" name="newqty1" class="form-control"   id="newqty1" hidden readonly> 
 
             
             <div class="enter w-100 py-4"><button class="btn btn-info w-25 px-4">SAVE</button></div>  
+            <input class="btn btn-outline-info w-30 rounded-pill text-light" style="text-align: left;margin-left: 800px;" type="button" onclick="newFunction()" value="Delete">
           
         </form>
     </div>
@@ -720,7 +880,7 @@ function showgrp3()
           {% if i.under == "Bank_Accounts" and "Cash_in_Hand" %}
       
           <tr>
-          <div style="margin-left: 25px;"><a onclick="setpartyname('{{ i.name }}','{{i.opening_blnc}}');">{{i.name}}</a></div>
+          <div style="margin-left: 25px;"><a onclick="setpartyname('{{ i.name }}','{{i.opening_blnc}}'); popup1()">{{i.name}}</a></div>
           </tr>
           {% endif %}
           {% endfor %}
@@ -736,7 +896,7 @@ function showgrp3()
 
 
     <h6 style="background-color:rgb(17, 169, 240) ;color:white">List of Ledgers Account</h6>
-      <button type="button" class="btn cancel close" onclick="closeForm()">X</button>
+      <button type="button" class="btn cancel close" onclick="closeForm1()">X</button>
 
 
   <hr >
@@ -793,7 +953,7 @@ function showgrp3()
       
           <h6 style="background-color:rgb(17, 169, 240) ;color:white">List of Stock items</h6>
             <button type="button" class="btn cancel close" onclick="closeForm3()">X</button>
-            <a  href="" style="margin-left:180px; cursor:pointer; color: white" >Create New</a>  
+            <a  href="{% url 'load_stock_item_creation' %}" style="margin-left:180px; cursor:pointer; color: white" >Create New</a>  
       
         <hr >
         <div >
@@ -890,6 +1050,318 @@ function showgrp3()
      
    
     </div> 
+    
+    <div class="form-popup2 m-3" id="pop2">
+        <div class="row bg-info text-light p-2 m-0">
+            <div class="col-md-6"><b>Stock Item Allocation</b></div>
+            <div class="col-md-6">
+                {% for i in tally %}
+                {{i.name}}
+            {% endfor %}
+            </div>
+        </div>
+        <div class="p-3" style="background-color:rgb(5, 1, 1);">
+            
+            <div class="table-responsive-sm" style="background-color:rgba(0,0,0,0.4);">
+                <Table class="w-100 table text-center" border="1">
+                    <tr>
+                        <!-- <th>Sl.no</th> -->
+                        <th>Godown</th>
+                        <th>Quantity</th>
+                        <th>Rate</th>
+                        <th>Per</th>
+                        <th>Amount</th>
+                        <th>Accept</th>
+        
+                    </tr>
+                    
+                    <tr>
+                      <td> 
+                        <input type="text" id="under8"  class="form-control" onclick="tap1()">
+                        </td>
+                      
+                      <td><input type="text" class="w-100 form-control" id="quantity3" onblur="passquantity1()"> </td>
+                      <td> <input type="text" class="w-100 form-control" id="rate3" onblur="passrate1()"></td>
+                      <td><input type="text" class="w-100 form-control" id="per" onblur="passper()"> </td>
+                      <td> <input type="text" class="w-100 form-control" id="value3" onblur="passvalue1()"></td>
+                      
+                      <td><a href="#"><button onclick="closeForm7()" class="btn btn-info">Accept</button></a></td> 
+            
+                    </tr>
+                    
+                    
+                </Table>
+            </div>
+            
+        </div>
+     
+   
+    </div> 
+<!--------------------------------------------------------------------------------------------->
+
+<div class="form-popup4 ScrollStyle m-3" id="pop4" style="width:700px;background-color:rgba(170, 165, 165, 0.96);">
+   
+
+    
+      
+   <h6  class="bg-info text-light p-1 m-1 text-center">Receipt Details</h6>
+   <!--
+   <div  style="text-align: center;margin-top:-35px;font-weight:900">{{cmp.name}}</div>
+    -->
+           
+               <div class="row container-fluid p-0 m-0" >
+
+                <div class="col-sm-6 m-0 p-4">
+
+                    <div class="row container-fluid  p-3 m-2">
+
+                        <div class="col-sm-4 m-0 p-0"> <label >Tracking No:</label></div>
+                        <div class="col-sm-8 m-0 p-0">
+                         <input type="text" class="form-control" placeholder="" name="tracking_no" required style="background-color: #2f516f;color: white;"></div>
+                    </div>
+                </div>
+                       <div class="col-sm-6 m-0 p-4">
+                       <div class="row container-fluid  p-3 m-2">
+                           <div class="col-sm-4 m-0 p-0"> <label >Dispatch Doc NO:</label></div>
+                           <div class="col-sm-8 m-0 p-0"> 
+                           <input type="text" class="form-control" id="" placeholder="" name="dispatchno" required style="background-color: #2f516f;color: white;"></div>
+                       </div>
+                       </div>
+
+                      
+
+                       <div class="col-sm-6 m-0 p-4">
+
+                       <div class="row container-fluid  p-3 m-2">
+                        <div class="col-sm-4 m-0 p-0"> <label >Dispatched through</label></div>
+                        <div class="col-sm-8 m-0 p-0"> 
+                        <input type="text" class="form-control" id="" placeholder="" name="dsptchthrough" required style="background-color: #2f516f;color: white;"></div>
+                    </div>
+                       </div>
+                       <div class="col-sm-6 m-0 p-4">
+
+                    <div class="row container-fluid  p-3 m-2">
+                        <div class="col-sm-4 m-0 p-0"> <label >Destination</label></div>
+                        <div class="col-sm-8 m-0 p-0"> 
+                        <input type="text" class="form-control" id="" placeholder="" name="destination" required style="background-color: #2f516f;color: white;"></div>
+                    </div>
+                       </div>
+                       <div class="col-sm-6 m-0 p-4">
+
+                    <div class="row container-fluid  p-3 m-2">
+                        <div class="col-sm-4 m-0 p-0"> <label >Carrier Name/Agent</label></div>
+                        <div class="col-sm-8 m-0 p-0"> 
+                        <input type="text" class="form-control" id="" placeholder="" name="carriername" required style="background-color: #2f516f;color: white;"></div>
+                    </div>
+                       </div>
+                    <div class="col-sm-6 m-0 p-4">
+
+                    <div class="row container-fluid  p-3 m-2">
+                        <div class="col-sm-4 m-0 p-0"> <label >Bill of Ladding</label></div>
+                        <div class="col-sm-8 m-0 p-0"> 
+                        <input type="text" class="form-control" id="" placeholder="" name="billoflading" required style="background-color: #2f516f;color: white;"></div>
+                    </div>
+                    </div>
+                    <div class="col-sm-6 m-0 p-4">
+
+                    <div class="row container-fluid  p-3 m-2">
+                        <div class="col-sm-4 m-0 p-0"> <label >Date</label></div>
+                        <div class="col-sm-8 m-0 p-0"> 
+                        <input type="date" class="form-control" id="" placeholder="" name="date" required style="background-color: #2f516f;color: white;"></div>
+                    </div>
+                    </div>
+                    <div class="col-sm-6 m-0 p-4">
+
+                    <div class="row container-fluid  p-3 m-2">
+                        <div class="col-sm-4 m-0 p-0"> <label >Motor vehicle NO:</label></div>
+                        <div class="col-sm-8 m-0 p-0"> 
+                        <input type="text" class="form-control" id="" placeholder="" name="motorvehicleno" required style="background-color: #2f516f;color: white;"></div>
+                    </div>
+                    </div>
+                    
+
+                    <div class="row container-fluid  p-0 m-0" style=" border: 1px solid rgba(128, 128, 128, 0.6);">
+                        <!-- <div class="col-sm-4 m-0 p-4" style=" border-right: 1px solid rgba(128, 128, 128, 0.6);"> -->
+                           
+         
+                             <hr>
+                                 <div class="col-sm-6 m-0 p-0" > <label for="c"><b>Original Invoice Details</b></label></div>
+                          
+         
+                             </div>
+                             <div class="col-sm-6 m-0 p-4">
+            
+                                <div class="row container-fluid  p-2 m-2">
+                                    <div class="col-sm-4 m-0 p-0"> <label >Original Incvoice NO:</label></div>
+                                    <div class="col-sm-8 m-0 p-0"> 
+                                    <input type="text" class="form-control" id="" placeholder="" name="invoiceno" required style="background-color: #2f516f;color: white;"></div>
+                                </div>
+                                </div>
+
+
+                             <div class="col-sm-6 m-0 p-4">
+
+                                <div class="row container-fluid  p-2 m-2">
+                                    <div class="col-sm-4 m-0 p-0"> <label >Date</label></div>
+                                    <div class="col-sm-8 m-0 p-0"> 
+                                    <input type="date" class="form-control" id="" placeholder="" name="invoicedate" required style="background-color: #2f516f;color: white;"></div>
+                                </div>
+                                </div>
+                               
+                   </div>
+
+                   <div class="col-sm-3 m-0 p-0"></div>
+
+                   <div class="enter w-100 py-4"><button class="btn btn-info w-25 px-4" onclick="closeForm8(); popup2();">SAVE</button></div>  
+                   
+               
+           </div>
+       <!--------------------------PARTY DETAILS-------------------------------------> 
+  
+       
+     <!---->
+
+     <div class="form-popup9 m-3" id="pop9" style="width:700px;background-color:rgba(170, 165, 165, 0.96);">
+        
+  
+                <h6  class="bg-info text-light p-1 m-1 text-center">Party Details</h6>
+                <div class="row container-fluid justify-content-center" >
+                    
+                    <div class="col-sm-6 m-2 p-4">
+
+                        <div class="row container-fluid  p-2 m-0">
+                            <div class="col-sm-4  p-0" > <label >Buyer(Biil to)</label></div>
+                            <div class="col-sm-8 p-0"><input required type="text" class="form-control" id="names"  placeholder="" name="name"></div>
+                        </div>
+                        
+
+                        <div class="row container-fluid  p-2 m-0">
+                            <div class="col-sm-4 m-0 p-0"> <label >Mailing Address</label></div>
+                            <div class="col-sm-8 m-0 p-0"> 
+                            <input type="text"  class="form-control" id="mailingname" name="mailingname"></div>
+                        </div>
+                        
+
+                        <div class="row container-fluid  p-2 m-0">
+                            <div class="col-sm-4 m-0 p-0"> <label >Address</label></div>
+                            <div class="col-sm-8 m-0 p-0"> 
+                            <input type="text" class="form-control" id="" placeholder="" name="address"></div>
+                        </div>
+                        <div class="row container-fluid  p-2 m-0">
+                            <div class="col-sm-4 m-0 p-0"> <label >State</label></div>
+                            <div class="col-sm-8 m-0 p-0"> 
+                            <input type="text" class="form-control" name="state" id="state" ></div>
+                           
+                        </div>
+                        
+                        <div class="row container-fluid  p-2 m-0">
+                            <div class="col-sm-4 m-0 p-0"> <label >Country</label></div>
+                            <div class="col-sm-8 m-0 p-0"> 
+                            <input type="text" class="form-control" value="India" id="" placeholder="" name="country" placeholder="india"></div>
+                        </div>
+            
+
+                    </div>
+                </div>
+              
+                <div class="col-sm-3 m-0 p-0"></div>
+
+                <div class="enter w-100 py-4"><button class="btn btn-info w-25 px-4" onclick="closeForm9()">OK</button></div>  
+
+            
+        </div>
+             
+
+<div class="party"  id="ledger3" hidden style="background-color:  #213b52; color:white;" >
+
+
+                    <h6 style="background-color:rgb(17, 169, 240) ;color:white">List of Ledgers Account</h6>
+                      <button type="button" class="btn cancel close" onclick="closeForm()">X</button>
+                
+                
+                  <hr >
+                  <div >
+                      <table >
+                      <tr >
+                          <div style="text-align: right;margin-right: 20px;"><a href="{% url 'create_ledger' %}">Create</a></div>   
+                                  
+                      </tr>
+                      <tr>
+                          <div style="text-align: right;margin-right: 20px;"><a href="{% url 'alter_company' %}">Back</a></div>   
+                          
+                      </tr>
+                      <hr style="width:100%;text-align:left;margin-left:0">
+                      {% for i in ledger %}
+                      
+                  
+                      <tr>
+                      <div style="margin-left: 25px;"><a onclick="setVtype('{{ i.name }}');">{{i.name}}</a></div>
+                      </tr>
+                      
+                      {% endfor %}
+                      
+                      
+                 </table>
+                </div>
+                </div>
+                
+                </div>     
+            </div>
+
+            <!-- Listing 
+              
+            <div id="table" class="row container" style="margin-block-start: -205px;margin-left: 550px;margin-top: -470px;">
+                <div class="col-sm-4 m-1 p-1"></div>
+                <div class="col-sm-4 m-1 p-1" style=" background-color:rgba(0,0,0,0.2); height: 400px; padding-bottom: 10px;">
+                    <!-- <a href="javascript:history.go(-1);" class="close">+</a> --><!--
+                <div  class="bg-info text-light">List of Ledger Accounts</div>
+                       <div>
+                           <table>
+                            <br>
+                            
+                            <tr>
+                                <div style="text-align: right;margin-right: 20px;"><a href="">Create</a></div>   
+                                
+                                </tr>
+                                <tr>
+                                    <div style="text-align: right;margin-right: 20px;"><a href="">Back</a></div>   
+                                    
+                                </tr>
+                                <hr style="width:100%;text-align:left;margin-left:0">
+                                {% for i in ledger %}
+                                    
+                                <tr>
+                                <div style="margin-left: 25px;"><a onclick="setVtype('{{ i.name }}');">{{i.name}}</a></div>
+                                </tr>
+                                
+                                {% endfor %}
+                                
+                                
+                           </table>
+                       </div>
+                    </div>
+
+            <div class="row container">  
+            <div class="modal" id="voucherPop" style="width: 260px;height: 800px; margin-left: 890px;margin-top: 150px;">
+                <div class="modal-content">
+                    <div class="modal-header bg-info ">
+                        <h6 class="modal-title ml-3">List of States</h6>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text-right"><a  style="cursor: pointer;" class="text-dark">Create</a></div>
+                        <hr class="mt-0 border-dark">
+                        <ul class="list-group">
+                            {% for s in states %}
+                            <li class="list-group-item" onclick="setstate('{{ s.name }}');">{{ s.name }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div> 
+        -->
+      
+       
+   
  <script>
     document.getElementById("currentDate").innerHTML=new Date().toDateString();
     document.getElementById('party').hidden=false
@@ -925,8 +1397,13 @@ function showgrp3()
             
             $('#total_amount').val(quantity5);    
         });
-          </script>           
-            
+          </script>    
+          <script>
+            function newFunction() {
+            document.getElementById("creditnoteform").reset();
+     }         
+          </script>       
+     
             
 <script>
 function setDate(){
